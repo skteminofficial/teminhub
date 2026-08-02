@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f4c81"/>
+      <stop offset="1" stop-color="#082f55"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#001a31" flood-opacity=".32"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <circle cx="424" cy="88" r="72" fill="#fcd34d" opacity=".13"/>
+  <circle cx="80" cy="430" r="96" fill="#38bdf8" opacity=".10"/>
+  <g filter="url(#shadow)">
+    <path d="M112 228 256 126l144 102-24 34-120-84-120 84z" fill="#fcd34d"/>
+    <path d="M142 248h228v142H142z" rx="18" fill="#fff"/>
+    <path d="M181 279h52v48h-52zm98 0h52v48h-52z" fill="#0f4c81" opacity=".92"/>
+    <path d="M224 338h64v52h-64z" fill="#dc2626"/>
+    <path d="M122 390h268v24H122z" rx="12" fill="#fcd34d"/>
+  </g>
+  <text x="256" y="472" fill="#fff" font-family="Arial, sans-serif" font-size="42" font-weight="800" text-anchor="middle" letter-spacing="5">TEMIN</text>
+</svg>

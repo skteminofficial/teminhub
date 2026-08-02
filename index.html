@@ -8,6 +8,12 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="TEMIN HUB">
+    <meta name="application-name" content="TEMIN HUB">
+    <meta name="msapplication-TileColor" content="#082f55">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
     <title>TEMIN HUB | Portal Digital SK Temin</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -108,6 +114,23 @@
         .font-title {
             font-family: 'Poppins', sans-serif;
         }
+
+        #pwaSplash {
+            transition: opacity .35s ease, visibility .35s ease;
+        }
+
+        #pwaSplash.splash-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        @keyframes splashPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+
+        .splash-logo { animation: splashPulse 1.4s ease-in-out infinite; }
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
@@ -134,6 +157,13 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between text-slate-800">
+    <!-- Splash screen PWA -->
+    <div id="pwaSplash" class="fixed inset-0 z-[120] bg-[#082f55] flex flex-col items-center justify-center px-6 text-center" aria-hidden="true">
+        <img src="icons/icon-192.png" alt="" class="splash-logo w-28 h-28 rounded-[2rem] shadow-2xl">
+        <p class="mt-6 text-[#fcd34d] text-xs font-bold tracking-[0.24em] uppercase">Sekolah Kebangsaan Temin</p>
+        <h1 class="mt-2 text-3xl font-extrabold text-white font-title">TEMIN HUB</h1>
+        <p class="mt-2 text-sm text-blue-100/75">Portal Digital SK Temin</p>
+    </div>
 
     <div id="toast" class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ease-in-out opacity-0 translate-y-[-20px] pointer-events-none">
         <div class="bg-slate-900 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 border border-slate-700">
@@ -648,11 +678,30 @@
         </div>
     </div>
 
+    <!-- Butang pemasangan PWA -->
+    <button id="installAppButton" type="button" class="hidden fixed right-4 bottom-4 z-[70] items-center gap-2 rounded-2xl bg-sktBlue px-4 py-3 text-xs font-extrabold text-white shadow-2xl shadow-blue-950/30 hover:bg-[#0b3d69] transition" aria-label="Pasang aplikasi TEMIN HUB">
+        <i class="fas fa-download"></i><span>Install App</span>
+    </button>
+
+    <!-- Panduan pemasangan iPhone/iPad -->
+    <div id="iosInstallModal" class="hidden fixed inset-0 z-[90] bg-slate-950/60 backdrop-blur-sm px-4 py-8 items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="iosInstallTitle" onclick="if (event.target === this) closeIosInstallGuide()">
+        <div class="w-full max-w-sm rounded-[2rem] bg-white p-6 shadow-2xl">
+            <div class="mx-auto w-14 h-14 rounded-2xl bg-blue-100 text-sktBlue flex items-center justify-center text-xl"><i class="fab fa-apple"></i></div>
+            <h2 id="iosInstallTitle" class="mt-4 text-center text-xl font-extrabold text-slate-800 font-title">Pasang pada iPhone/iPad</h2>
+            <ol class="mt-5 space-y-3 text-sm text-slate-600">
+                <li class="flex gap-3"><span class="font-extrabold text-sktBlue">1.</span><span>Buka TEMIN HUB menggunakan <strong>Safari</strong>.</span></li>
+                <li class="flex gap-3"><span class="font-extrabold text-sktBlue">2.</span><span>Tekan ikon <strong>Share</strong> <i class="fas fa-arrow-up-from-bracket text-sktBlue"></i>.</span></li>
+                <li class="flex gap-3"><span class="font-extrabold text-sktBlue">3.</span><span>Pilih <strong>Add to Home Screen</strong>, kemudian tekan <strong>Add</strong>.</span></li>
+            </ol>
+            <button type="button" onclick="closeIosInstallGuide()" class="mt-6 w-full rounded-2xl bg-sktBlue py-3 text-sm font-bold text-white">Faham</button>
+        </div>
+    </div>
+
     <!-- Footer Section -->
     <footer class="mt-16 bg-[#072b4b] text-blue-100/70 px-4 py-10 text-center border-t border-white/5">
         <div class="max-w-4xl mx-auto">
             <img src="logo-sk-temin.png" alt="" aria-hidden="true" class="w-12 h-12 object-contain mx-auto opacity-90">
-            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.1 ePIBG+</p>
+            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.2 PWA</p>
             <p class="mt-1.5 text-xs text-sktYellow font-semibold">&copy; SK Temin | Unit ICT</p>
             <div class="mx-auto my-5 h-px max-w-xs bg-white/10"></div>
             <p class="text-[10px] md:text-[11px] text-blue-100/55">
@@ -1293,6 +1342,92 @@ window.copyAll = function () {
         salinCaraLama();
     }
 };
+
+        /* PWA: pemasangan, splash screen dan service worker */
+        let deferredInstallPrompt = null;
+
+        function isIosDevice() {
+            return /iphone|ipad|ipod/i.test(window.navigator.userAgent);
+        }
+
+        function isStandaloneMode() {
+            return window.matchMedia('(display-mode: standalone)').matches ||
+                window.navigator.standalone === true;
+        }
+
+        function showInstallButton() {
+            if (isStandaloneMode()) return;
+            const button = document.getElementById('installAppButton');
+            button.classList.remove('hidden');
+            button.classList.add('flex');
+        }
+
+        function hideInstallButton() {
+            const button = document.getElementById('installAppButton');
+            button.classList.add('hidden');
+            button.classList.remove('flex');
+        }
+
+        function openIosInstallGuide() {
+            const modal = document.getElementById('iosInstallModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeIosInstallGuide() {
+            const modal = document.getElementById('iosInstallModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        window.addEventListener('beforeinstallprompt', function (event) {
+            event.preventDefault();
+            deferredInstallPrompt = event;
+            showInstallButton();
+        });
+
+        window.addEventListener('appinstalled', function () {
+            deferredInstallPrompt = null;
+            hideInstallButton();
+            if (typeof showToast === 'function') showToast('TEMIN HUB berjaya dipasang.');
+        });
+
+        document.getElementById('installAppButton').addEventListener('click', async function () {
+            if (deferredInstallPrompt) {
+                deferredInstallPrompt.prompt();
+                await deferredInstallPrompt.userChoice;
+                deferredInstallPrompt = null;
+                hideInstallButton();
+                return;
+            }
+            if (isIosDevice()) {
+                openIosInstallGuide();
+                return;
+            }
+            if (typeof showToast === 'function') {
+                showToast('Gunakan menu pelayar dan pilih “Install app” atau “Add to Home screen”.');
+            }
+        });
+
+        window.addEventListener('load', function () {
+            window.setTimeout(function () {
+                document.getElementById('pwaSplash')?.classList.add('splash-hidden');
+            }, 650);
+
+            if (isIosDevice() && !isStandaloneMode()) showInstallButton();
+
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('./sw.js').catch(function (error) {
+                    console.warn('Service worker tidak dapat didaftarkan:', error);
+                });
+            }
+
+            const requestedPortal = new URLSearchParams(window.location.search).get('portal');
+            if (requestedPortal === 'guru') requestTeacherPortal();
+            if (requestedPortal === 'ibubapa') showPortalView('ibubapa');
+        });
     </script>
 </body>
 </html>

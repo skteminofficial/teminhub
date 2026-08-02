@@ -192,7 +192,7 @@
         <nav id="portalNav" aria-label="Navigasi TEMIN HUB" class="glass-panel app-card rounded-3xl border border-white/90 p-2 mb-6 grid grid-cols-4 gap-1.5 sticky top-3 z-30">
             <button id="nav-dashboard" type="button" onclick="showPortalView('dashboard')" class="portal-nav-active rounded-2xl py-3 px-1 text-[10px] md:text-xs font-bold transition"><i class="fas fa-home block text-base mb-1"></i>Dashboard</button>
             <button id="nav-murid" type="button" onclick="showPortalView('murid')" class="rounded-2xl py-3 px-1 text-[10px] md:text-xs font-bold text-slate-500 hover:bg-blue-50 hover:text-sktBlue transition"><i class="fas fa-user-graduate block text-base mb-1"></i>Murid</button>
-            <button id="nav-guru" type="button" onclick="showPortalView('guru')" class="rounded-2xl py-3 px-1 text-[10px] md:text-xs font-bold text-slate-500 hover:bg-blue-50 hover:text-sktBlue transition"><i class="fas fa-chalkboard-teacher block text-base mb-1"></i>Guru</button>
+            <button id="nav-guru" type="button" onclick="requestTeacherPortal()" class="rounded-2xl py-3 px-1 text-[10px] md:text-xs font-bold text-slate-500 hover:bg-blue-50 hover:text-sktBlue transition"><i class="fas fa-chalkboard-teacher block text-base mb-1"></i>Guru</button>
             <button id="nav-ibubapa" type="button" onclick="showPortalView('ibubapa')" class="rounded-2xl py-3 px-1 text-[10px] md:text-xs font-bold text-slate-500 hover:bg-blue-50 hover:text-sktBlue transition"><i class="fas fa-people-roof block text-base mb-1"></i>Ibu Bapa</button>
         </nav>
 
@@ -212,7 +212,7 @@
                     <h3 class="mt-5 text-lg font-bold font-title">Murid</h3><p class="mt-1 text-xs text-blue-100">DELIMa, AINS NILAM dan pembelajaran digital.</p>
                     <span class="mt-4 inline-flex items-center gap-2 text-xs font-bold">Buka Portal <i class="fas fa-arrow-right"></i></span>
                 </button>
-                <button type="button" onclick="showPortalView('guru')" class="portal-menu-card text-left rounded-[1.75rem] p-5 bg-gradient-to-br from-emerald-500 to-emerald-700 text-white shadow-xl shadow-emerald-900/15 hover:-translate-y-1 transition">
+                <button type="button" onclick="requestTeacherPortal()" class="portal-menu-card text-left rounded-[1.75rem] p-5 bg-gradient-to-br from-emerald-500 to-emerald-700 text-white shadow-xl shadow-emerald-900/15 hover:-translate-y-1 transition">
                     <span class="w-12 h-12 rounded-2xl bg-white/15 flex items-center justify-center text-xl"><i class="fas fa-chalkboard-teacher"></i></span>
                     <h3 class="mt-5 text-lg font-bold font-title">Guru</h3><p class="mt-1 text-xs text-emerald-100">Sistem pengurusan, tempahan dan pautan rasmi.</p>
                     <span class="mt-4 inline-flex items-center gap-2 text-xs font-bold">Buka Portal <i class="fas fa-arrow-right"></i></span>
@@ -240,7 +240,7 @@
             <div class="flex items-center gap-3 px-1"><span class="w-11 h-11 rounded-2xl bg-blue-100 text-sktBlue flex items-center justify-center"><i class="fas fa-user-graduate"></i></span><div><h2 class="text-xl font-extrabold text-slate-800 font-title">Portal Murid</h2><p class="text-xs text-slate-500">Pembelajaran dan akaun digital murid.</p></div></div>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                 <button type="button" onclick="openDelimaModule()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-blue-100 text-sktBlue flex items-center justify-center text-lg"><i class="fas fa-id-card"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Semakan DELIMa</span><span class="mt-1 block text-[10px] text-slate-400">Semak ID dan kata laluan</span></button>
-                <a href="https://d3.delima.edu.my/landing" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-lg"><i class="fas fa-graduation-cap"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">DELIMa 3.0</span><span class="mt-1 block text-[10px] text-slate-400">Portal DELIMa versi baharu</span></a>
+                <a href="https://d2.delima.edu.my/login" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-lg"><i class="fas fa-graduation-cap"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Portal DELIMa</span><span class="mt-1 block text-[10px] text-slate-400">Log masuk DELIMa KPM</span></a>
                 <a href="https://ains.moe.gov.my/login?returnUrl=/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg"><i class="fas fa-book-open"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">AINS NILAM</span><span class="mt-1 block text-[10px] text-slate-400">Rekod bacaan murid</span></a>
                 <a href="https://classroom.google.com/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-green-100 text-green-700 flex items-center justify-center text-lg"><i class="fas fa-chalkboard"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Google Classroom</span><span class="mt-1 block text-[10px] text-slate-400">Kelas dan tugasan</span></a>
                 <a href="https://accounts.google.com/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center text-lg"><i class="fab fa-google"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Google</span><span class="mt-1 block text-[10px] text-slate-400">Akaun Google murid</span></a>
@@ -249,44 +249,28 @@
         </section>
 
         <section id="portal-guru" class="portal-view hidden space-y-6">
-            <div class="flex items-center gap-3 px-1"><span class="w-11 h-11 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-chalkboard-teacher"></i></span><div><h2 class="text-xl font-extrabold text-slate-800 font-title">Portal Guru</h2><p class="text-xs text-slate-500">Pengurusan, sistem rasmi dan akses pantas untuk guru.</p></div></div>
+            <div class="flex items-center justify-between gap-3 px-1">
+                <div class="flex items-center gap-3"><span class="w-11 h-11 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-chalkboard-teacher"></i></span><div><h2 class="text-xl font-extrabold text-slate-800 font-title">Portal Guru</h2><p class="text-xs text-slate-500">Pengurusan dan perkhidmatan rasmi guru.</p></div></div>
+                <button type="button" onclick="lockTeacherPortal()" class="rounded-xl bg-slate-100 hover:bg-slate-200 px-3 py-2 text-[10px] font-bold text-slate-600 transition"><i class="fas fa-lock mr-1"></i>Kunci</button>
+            </div>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                <button type="button" onclick="showComingSoon('Tempahan Bilik Khas')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center">
-                    <span class="mx-auto w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center"><i class="fas fa-door-open"></i></span>
-                    <span class="mt-3 block text-sm font-bold text-slate-800">Tempahan Bilik Khas</span>
-                    <span class="mt-1 block text-[10px] text-slate-400">Akses sistem tempahan bilik</span>
-                </button>
-                <button type="button" onclick="showComingSoon('Pinjaman Aset ICT')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center">
-                    <span class="mx-auto w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center"><i class="fas fa-laptop"></i></span>
-                    <span class="mt-3 block text-sm font-bold text-slate-800">Pinjaman Aset ICT</span>
-                    <span class="mt-1 block text-[10px] text-slate-400">Laptop, projektor dan aset ICT</span>
-                </button>
-                <button type="button" onclick="showComingSoon('Aduan ICT')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center">
-                    <span class="mx-auto w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center"><i class="fas fa-tools"></i></span>
-                    <span class="mt-3 block text-sm font-bold text-slate-800">Aduan ICT</span>
-                    <span class="mt-1 block text-[10px] text-slate-400">Lapor kerosakan dan isu teknikal</span>
-                </button>
-                <a href="https://hrmis2.eghrmis.gov.my/HRMISNET/Common/Main/Login.aspx" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center">
-                    <span class="mx-auto w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-user-tie"></i></span>
-                    <span class="mt-3 block text-sm font-bold text-slate-800">HRMIS</span>
-                    <span class="mt-1 block text-[10px] text-slate-400">Sistem pengurusan sumber manusia</span>
-                </a>
-                <a href="https://idme.moe.gov.my/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center">
-                    <span class="mx-auto w-12 h-12 rounded-2xl bg-violet-100 text-violet-700 flex items-center justify-center"><i class="fas fa-key"></i></span>
-                    <span class="mt-3 block text-sm font-bold text-slate-800">IDMe</span>
-                    <span class="mt-1 block text-[10px] text-slate-400">Akses identiti digital KPM</span>
-                </a>
-                <a href="https://eoperasi.moe.gov.my/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center">
-                    <span class="mx-auto w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center"><i class="fas fa-clipboard-list"></i></span>
-                    <span class="mt-3 block text-sm font-bold text-slate-800">e-Operasi</span>
-                    <span class="mt-1 block text-[10px] text-slate-400">Maklumat perkhidmatan dan opsyen guru</span>
-                </a>
+                <a href="https://script.google.com/macros/s/AKfycbzvweOntJNOGzojTR5cpWHBIWmpvO244p9gFAqUideqBFaCOIFQy2oxilD2qHngj_9f/exec?portal=teacher" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-chalkboard-user"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">ePIBG+ Guru Kelas</span><span class="mt-1 block text-[10px] text-slate-400">Rekod dan semak bayaran murid</span></a>
+                <a href="https://script.google.com/a/macros/moe-dl.edu.my/s/AKfycbxGnL-pbua1Pj29I_Xnav8bDd06o37AAsbj1zcxX0ozYYuHxtpol1rEbr1t2Sbmf_E/exec" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center"><i class="fas fa-coins"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">ePIBG+ Bendahari</span><span class="mt-1 block text-[10px] text-slate-400">Pengurusan dan semakan kewangan PIBG</span></a>
+                <button type="button" onclick="showComingSoon('Tempahan Bilik')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center"><i class="fas fa-door-open"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Tempahan Bilik</span></button>
+                <button type="button" onclick="showComingSoon('Tempahan ICT')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center"><i class="fas fa-laptop"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Tempahan ICT</span></button>
+                <button type="button" onclick="showComingSoon('Aduan ICT')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center"><i class="fas fa-tools"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Aduan ICT</span></button>
+                <a href="https://eoperasi.moe.gov.my/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center"><i class="fas fa-briefcase"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">e-Operasi</span><span class="mt-1 block text-[10px] text-slate-400">Maklumat perkhidmatan guru</span></a>
+                <a href="https://hrmis2.eghrmis.gov.my/HRMISNET/Common/Main/Login.aspx" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-violet-100 text-violet-700 flex items-center justify-center"><i class="fas fa-user-gear"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">HRMIS</span><span class="mt-1 block text-[10px] text-slate-400">Pengurusan sumber manusia</span></a>
+                <a href="https://epenyatagaji-laporan.anm.gov.my/Layouts/Login/Login.aspx" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center"><i class="fas fa-file-invoice-dollar"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">ANM</span><span class="mt-1 block text-[10px] text-slate-400">e-Penyata Gaji &amp; Laporan</span></a>
+                <a href="https://idme.moe.gov.my/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-key"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">IDMe</span></a>
             </div>
         </section>
 
         <section id="portal-ibubapa" class="portal-view hidden space-y-6">
             <div class="flex items-center gap-3 px-1"><span class="w-11 h-11 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center"><i class="fas fa-people-roof"></i></span><div><h2 class="text-xl font-extrabold text-slate-800 font-title">Portal Ibu Bapa</h2><p class="text-xs text-slate-500">Semakan anak dan maklumat sekolah.</p></div></div>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                <a href="https://script.google.com/macros/s/AKfycbzvweOntJNOGzojTR5cpWHBIWmpvO244p9gFAqUideqBFaCOIFQy2oxilD2qHngj_9f/exec?portal=parent" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-hand-holding-heart"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">ePIBG+</span><span class="mt-1 block text-[10px] text-slate-400">Bayar sumbangan PIBG</span></a>
+                <a href="https://script.google.com/macros/s/AKfycbzvweOntJNOGzojTR5cpWHBIWmpvO244p9gFAqUideqBFaCOIFQy2oxilD2qHngj_9f/exec?portal=donation" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center"><i class="fas fa-circle-dollar-to-slot"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Sumbangan</span><span class="mt-1 block text-[10px] text-slate-400">Kempen sumbangan semasa</span></a>
                 <button type="button" onclick="openDelimaModule()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-blue-100 text-sktBlue flex items-center justify-center"><i class="fas fa-id-card"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">DELIMa Anak</span></button>
                 <button type="button" onclick="showComingSoon('Kokurikulum Anak')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-medal"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Kokurikulum</span></button>
                 <button type="button" onclick="showComingSoon('Rumah Sukan')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center"><i class="fas fa-flag"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Rumah Sukan</span></button>
@@ -342,7 +326,7 @@
             </section>
 
             <section aria-label="Akses pantas" class="grid grid-cols-3 gap-2.5 md:gap-3">
-                <a href="https://d3.delima.edu.my/landing" target="_blank" rel="noopener noreferrer" class="quick-login-card glass-panel app-card rounded-2xl border border-white/80 p-3 md:p-4 text-center cursor-pointer transition duration-200 hover:-translate-y-1 hover:shadow-xl active:scale-[0.98]">
+                <a href="https://d2.delima.edu.my/login" target="_blank" rel="noopener noreferrer" class="quick-login-card glass-panel app-card rounded-2xl border border-white/80 p-3 md:p-4 text-center cursor-pointer transition duration-200 hover:-translate-y-1 hover:shadow-xl active:scale-[0.98]">
                     <span class="quick-login-icon mx-auto flex h-10 w-10 items-center justify-center rounded-2xl bg-amber-100 text-amber-700"><i class="fas fa-graduation-cap"></i></span>
                     <span class="mt-2 block text-[10px] md:text-xs font-bold text-slate-700">DELIMa</span>
                     <span class="mt-1 block text-[9px] md:text-[10px] font-medium text-slate-400">Klik untuk Log Masuk</span>
@@ -629,11 +613,33 @@
         </div>
     </main>
 
+    <!-- Kunci akses asas Portal Guru -->
+    <div id="teacherLoginModal" class="hidden fixed inset-0 z-[80] bg-slate-950/60 backdrop-blur-sm px-4 py-8 items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="teacherLoginTitle">
+        <div class="w-full max-w-sm rounded-[2rem] bg-white p-6 md:p-7 shadow-2xl border border-white/80">
+            <div class="mx-auto w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl"><i class="fas fa-user-shield"></i></div>
+            <h2 id="teacherLoginTitle" class="mt-4 text-center text-xl font-extrabold text-slate-800 font-title">Akses Portal Guru</h2>
+            <p class="mt-2 text-center text-xs text-slate-500 leading-relaxed">Masukkan PIN guru untuk membuka sistem dan perkhidmatan dalaman.</p>
+            <form class="mt-5 space-y-4" onsubmit="verifyTeacherPin(event)">
+                <div>
+                    <label for="teacherPinInput" class="block mb-2 text-xs font-bold text-slate-600">PIN PORTAL GURU</label>
+                    <input id="teacherPinInput" type="password" inputmode="numeric" maxlength="4" autocomplete="off" required placeholder="••••" class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3.5 text-center text-xl font-bold tracking-[0.45em] text-slate-800 focus:border-emerald-500 focus:outline-none">
+                    <p id="teacherPinError" class="hidden mt-2 text-center text-xs font-semibold text-red-600">PIN tidak betul. Sila cuba semula.</p>
+                </div>
+                <label class="flex items-center gap-3 rounded-2xl bg-slate-50 px-4 py-3 cursor-pointer">
+                    <input id="rememberTeacherLogin" type="checkbox" checked class="h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500">
+                    <span class="text-xs font-semibold text-slate-600">Ingat saya pada peranti ini</span>
+                </label>
+                <button type="submit" class="w-full rounded-2xl bg-emerald-600 hover:bg-emerald-700 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-900/15 transition"><i class="fas fa-unlock-alt mr-2"></i>Log Masuk</button>
+                <button type="button" onclick="closeTeacherLogin()" class="w-full rounded-2xl bg-slate-100 hover:bg-slate-200 py-3 text-xs font-bold text-slate-600 transition">Batal</button>
+            </form>
+        </div>
+    </div>
+
     <!-- Footer Section -->
     <footer class="mt-16 bg-[#072b4b] text-blue-100/70 px-4 py-10 text-center border-t border-white/5">
         <div class="max-w-4xl mx-auto">
             <img src="logo-sk-temin.png" alt="" aria-hidden="true" class="w-12 h-12 object-contain mx-auto opacity-90">
-            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.1</p>
+            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.1 ePIBG+</p>
             <p class="mt-1.5 text-xs text-sktYellow font-semibold">&copy; SK Temin | Unit ICT</p>
             <div class="mx-auto my-5 h-px max-w-xs bg-white/10"></div>
             <p class="text-[10px] md:text-[11px] text-blue-100/55">
@@ -692,6 +698,62 @@
                 setPortalNavActive(viewId);
                 window.scrollTo({ top: Math.max(0, document.getElementById('portalNav').offsetTop - 12), behavior: 'smooth' });
             }
+        }
+
+        const TEACHER_PORTAL_PIN = '2050';
+        const TEACHER_REMEMBER_KEY = 'teminhub_teacher_remembered';
+        const TEACHER_SESSION_KEY = 'teminhub_teacher_session';
+
+        function isTeacherPortalUnlocked() {
+            return localStorage.getItem(TEACHER_REMEMBER_KEY) === 'true' ||
+                sessionStorage.getItem(TEACHER_SESSION_KEY) === 'true';
+        }
+
+        function requestTeacherPortal() {
+            if (isTeacherPortalUnlocked()) {
+                showPortalView('guru');
+                return;
+            }
+            const modal = document.getElementById('teacherLoginModal');
+            const input = document.getElementById('teacherPinInput');
+            document.getElementById('teacherPinError').classList.add('hidden');
+            input.value = '';
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => input.focus(), 80);
+        }
+
+        function closeTeacherLogin() {
+            const modal = document.getElementById('teacherLoginModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        function verifyTeacherPin(event) {
+            event.preventDefault();
+            const pin = document.getElementById('teacherPinInput').value.trim();
+            if (pin !== TEACHER_PORTAL_PIN) {
+                document.getElementById('teacherPinError').classList.remove('hidden');
+                document.getElementById('teacherPinInput').select();
+                return;
+            }
+            if (document.getElementById('rememberTeacherLogin').checked) {
+                localStorage.setItem(TEACHER_REMEMBER_KEY, 'true');
+            } else {
+                sessionStorage.setItem(TEACHER_SESSION_KEY, 'true');
+            }
+            closeTeacherLogin();
+            showPortalView('guru');
+            showToast('Portal Guru berjaya dibuka.');
+        }
+
+        function lockTeacherPortal() {
+            localStorage.removeItem(TEACHER_REMEMBER_KEY);
+            sessionStorage.removeItem(TEACHER_SESSION_KEY);
+            showPortalView('dashboard');
+            showToast('Portal Guru telah dikunci semula.');
         }
 
         function openDelimaModule() {

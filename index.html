@@ -671,9 +671,8 @@
             <h2 id="epibgMenuTitle" class="mt-4 text-center text-xl font-extrabold text-slate-800 font-title">Pilih Akses ePIBG+</h2>
             <p class="mt-2 text-center text-xs text-slate-500">Pilih menu mengikut peranan anda.</p>
             <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <a href="https://script.google.com/macros/s/AKfycbxGnL-pbua1Pj29I_Xnav8bDd06o37AAsbj1zcxX0ozYYuHxtpol1rEbr1t2Sbmf_E/exec?portal=teacher
-" target="_blank" rel="noopener noreferrer" onclick="closeEpibgMenu()" class="rounded-2xl border border-emerald-100 bg-emerald-50 p-5 text-center hover:bg-emerald-100 transition"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-emerald-700 flex items-center justify-center shadow-sm"><i class="fas fa-chalkboard-user"></i></span><span class="mt-3 block text-sm font-extrabold text-slate-800">Guru Kelas</span><span class="mt-1 block text-[10px] text-slate-500">Rekod dan semak bayaran murid</span></a>
-                <a href="https://script.google.com/a/macros/moe-dl.edu.my/s/AKfycbxGnL-pbua1Pj29I_Xnav8bDd06o37AAsbj1zcxX0ozYYuHxtpol1rEbr1t2Sbmf_E/exec" target="_blank" rel="noopener noreferrer" onclick="closeEpibgMenu()" class="rounded-2xl border border-amber-100 bg-amber-50 p-5 text-center hover:bg-amber-100 transition"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-amber-700 flex items-center justify-center shadow-sm"><i class="fas fa-coins"></i></span><span class="mt-3 block text-sm font-extrabold text-slate-800">Bendahari PIBG</span><span class="mt-1 block text-[10px] text-slate-500">Pengurusan dan semakan kewangan</span></a>
+                <a href="https://script.google.com/macros/s/AKfycbxGnL-pbua1Pj29I_Xnav8bDd06o37AAsbj1zcxX0ozYYuHxtpol1rEbr1t2Sbmf_E/exec?portal=teacher" target="_blank" rel="noopener noreferrer" onclick="closeEpibgMenu()" class="rounded-2xl border border-emerald-100 bg-emerald-50 p-5 text-center hover:bg-emerald-100 transition"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-emerald-700 flex items-center justify-center shadow-sm"><i class="fas fa-chalkboard-user"></i></span><span class="mt-3 block text-sm font-extrabold text-slate-800">Guru Kelas</span><span class="mt-1 block text-[10px] text-slate-500">Rekod dan semak bayaran murid</span></a>
+                <a href="https://script.google.com/macros/s/AKfycbxGnL-pbua1Pj29I_Xnav8bDd06o37AAsbj1zcxX0ozYYuHxtpol1rEbr1t2Sbmf_E/exec" target="_blank" rel="noopener noreferrer" onclick="closeEpibgMenu()" class="rounded-2xl border border-amber-100 bg-amber-50 p-5 text-center hover:bg-amber-100 transition"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-amber-700 flex items-center justify-center shadow-sm"><i class="fas fa-coins"></i></span><span class="mt-3 block text-sm font-extrabold text-slate-800">Bendahari PIBG</span><span class="mt-1 block text-[10px] text-slate-500">Pengurusan dan semakan kewangan</span></a>
             </div>
             <button type="button" onclick="closeEpibgMenu()" class="mt-4 w-full rounded-2xl bg-slate-100 hover:bg-slate-200 py-3 text-xs font-bold text-slate-600 transition">Tutup</button>
         </div>
@@ -702,7 +701,7 @@
     <footer class="mt-16 bg-[#072b4b] text-blue-100/70 px-4 py-10 text-center border-t border-white/5">
         <div class="max-w-4xl mx-auto">
             <img src="logo-sk-temin.png" alt="" aria-hidden="true" class="w-12 h-12 object-contain mx-auto opacity-90">
-            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.2 PWA</p>
+            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.2.1 PWA</p>
             <p class="mt-1.5 text-xs text-sktYellow font-semibold">&copy; SK Temin | Unit ICT</p>
             <div class="mx-auto my-5 h-px max-w-xs bg-white/10"></div>
             <p class="text-[10px] md:text-[11px] text-blue-100/55">
@@ -1420,6 +1419,12 @@ window.copyAll = function () {
             if (isIosDevice() && !isStandaloneMode()) showInstallButton();
 
             if ('serviceWorker' in navigator) {
+                let refreshing = false;
+                navigator.serviceWorker.addEventListener('controllerchange', function () {
+                    if (refreshing) return;
+                    refreshing = true;
+                    window.location.reload();
+                });
                 navigator.serviceWorker.register('./sw.js').catch(function (error) {
                     console.warn('Service worker tidak dapat didaftarkan:', error);
                 });

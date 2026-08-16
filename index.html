@@ -150,7 +150,22 @@
             border-radius: 9999px; background: rgba(255,255,255,.14); transition: transform .3s ease; z-index: -1;
         }
         .portal-menu-card:hover::before { transform: scale(1.35); }
-        .portal-nav-active { background: #0f4c81; color: white; box-shadow: 0 10px 25px rgba(15,76,129,.22); }
+        #portalNav button { min-height: 72px; font-size: 12px; }
+        #portalNav button i { font-size: 20px; margin-bottom: 6px; }
+        #nav-dashboard { color: #475569; background: #f1f5f9; }
+        #nav-murid { color: #1d4ed8; background: #dbeafe; }
+        #nav-guru { color: #047857; background: #d1fae5; }
+        #nav-ibubapa { color: #b45309; background: #fef3c7; }
+
+        #nav-dashboard.portal-nav-active { background: #475569; color: white !important; box-shadow: 0 10px 25px rgba(71,85,105,.22); }
+        #nav-murid.portal-nav-active { background: #2563eb; color: white !important; box-shadow: 0 10px 25px rgba(37,99,235,.25); }
+        #nav-guru.portal-nav-active { background: #059669; color: white !important; box-shadow: 0 10px 25px rgba(5,150,105,.25); }
+        #nav-ibubapa.portal-nav-active { background: #d97706; color: white !important; box-shadow: 0 10px 25px rgba(217,119,6,.25); }
+
+        @media (min-width: 768px) {
+            #portalNav button { min-height: 78px; font-size: 13px; }
+            #portalNav button i { font-size: 22px; }
+        }
         .service-card { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
         .service-card:hover { transform: translateY(-3px); box-shadow: 0 16px 35px rgba(15,76,129,.11); border-color: rgba(15,76,129,.22); }
 
@@ -802,7 +817,6 @@
                 const button = document.getElementById(`nav-${id}`);
                 if (!button) return;
                 button.classList.toggle('portal-nav-active', id === viewId);
-                button.classList.toggle('text-slate-500', id !== viewId);
             });
         }
 

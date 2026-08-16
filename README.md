@@ -1,2 +1,0 @@
-# teminhub
-PORTAL DIGITAL UTAMA

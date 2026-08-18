@@ -257,11 +257,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="glass-panel app-card rounded-3xl border border-white/90 p-5">
                     <div class="flex items-center gap-3"><span class="w-10 h-10 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center"><i class="fas fa-bullhorn"></i></span><div><h3 class="font-bold text-slate-800">Pengumuman</h3><p class="text-xs text-slate-400">Ruang pengumuman rasmi sekolah.</p></div></div>
-                    <p class="mt-4 rounded-2xl bg-slate-50 p-4 text-xs text-slate-500">Tiada pengumuman baharu buat masa ini.</p>
+                    <div id="announcementList" class="mt-4 space-y-3"><p class="rounded-2xl bg-slate-50 p-4 text-xs text-slate-500">Memuatkan pengumuman...</p></div>
                 </div>
                 <div class="glass-panel app-card rounded-3xl border border-white/90 p-5">
                     <div class="flex items-center gap-3"><span class="w-10 h-10 rounded-2xl bg-violet-50 text-violet-600 flex items-center justify-center"><i class="fas fa-calendar-alt"></i></span><div><h3 class="font-bold text-slate-800">Takwim Sekolah</h3><p class="text-xs text-slate-400">Aktiviti dan tarikh penting.</p></div></div>
-                    <button type="button" onclick="showComingSoon('Takwim Sekolah')" class="mt-4 w-full rounded-2xl bg-slate-50 hover:bg-slate-100 p-4 text-xs font-bold text-slate-600 transition">Lihat Takwim</button>
+                    <div id="calendarList" class="mt-4 space-y-3"><p class="rounded-2xl bg-slate-50 p-4 text-xs text-slate-500">Memuatkan takwim...</p></div>
                 </div>
             </div>
         </section>
@@ -286,6 +286,7 @@
             </div>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                 <button type="button" onclick="openEpibgMenu()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-hand-holding-dollar"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">ePIBG+</span><span class="mt-1 block text-[10px] text-slate-400">Guru Kelas &amp; Bendahari PIBG</span></button>
+                <button type="button" onclick="openContentManager()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center"><i class="fas fa-bullhorn"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Pengumuman &amp; Takwim</span><span class="mt-1 block text-[10px] text-slate-400">Terbit kandungan sekolah</span></button>
                 <a href="https://www.appsheet.com/newshortcut/d2caf4cd-c3c3-4f03-b52c-0554147622a7" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center"><i class="fas fa-door-open"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Tempahan Bilik</span><span class="mt-1 block text-[10px] font-semibold text-blue-600">Klik untuk muat naik AppSheet</span><span class="mt-1 block text-[10px] text-slate-400">Gunakan ID DELIMa guru</span></a>
                 <button type="button" onclick="showComingSoon('Tempahan ICT')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center"><i class="fas fa-laptop"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Tempahan ICT</span></button>
                 <button type="button" onclick="showComingSoon('Aduan ICT')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center"><i class="fas fa-tools"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Aduan ICT</span></button>
@@ -703,6 +704,36 @@
         </div>
     </div>
 
+    <!-- Borang penerbitan Pengumuman dan Takwim -->
+    <div id="contentManagerModal" class="hidden fixed inset-0 z-[88] bg-slate-950/60 backdrop-blur-sm px-4 py-6 items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="contentManagerTitle" onclick="if (event.target === this) closeContentManager()">
+        <div class="w-full max-w-2xl max-h-[94vh] overflow-y-auto rounded-[2rem] bg-white p-5 md:p-7 shadow-2xl border border-white/80">
+            <div class="flex items-start justify-between gap-3">
+                <div class="flex items-center gap-3"><span class="w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center"><i class="fas fa-pen-to-square"></i></span><div><h2 id="contentManagerTitle" class="text-lg font-extrabold text-slate-800 font-title">Terbit Kandungan</h2><p class="text-xs text-slate-500">Pengumuman atau takwim sekolah</p></div></div>
+                <button type="button" onclick="closeContentManager()" class="w-10 h-10 rounded-xl bg-slate-100 text-slate-500"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="contentManagerForm" class="mt-5 space-y-4" onsubmit="publishContent(event)">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label for="contentType" class="block mb-2 text-xs font-bold text-slate-600">JENIS</label><select id="contentType" required onchange="toggleContentFields()" class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-rose-500 focus:outline-none"><option value="PENGUMUMAN">Pengumuman</option><option value="TAKWIM">Takwim</option></select></div>
+                    <div><label for="contentTarget" class="block mb-2 text-xs font-bold text-slate-600">SASARAN</label><select id="contentTarget" required class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-rose-500 focus:outline-none"><option>Semua</option><option>Murid</option><option>Ibu Bapa</option><option>Guru</option></select></div>
+                </div>
+                <div><label for="contentTitle" class="block mb-2 text-xs font-bold text-slate-600">TAJUK</label><input id="contentTitle" required maxlength="120" placeholder="Contoh: Pertandingan Poster Bulan Kemerdekaan" class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-rose-500 focus:outline-none"></div>
+                <div><label for="contentDescription" class="block mb-2 text-xs font-bold text-slate-600">KETERANGAN</label><textarea id="contentDescription" required maxlength="1000" rows="3" placeholder="Masukkan maklumat ringkas, syarat atau arahan..." class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-rose-500 focus:outline-none"></textarea></div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div><label for="contentStart" class="block mb-2 text-xs font-bold text-slate-600">TARIKH MULA / AKTIVITI</label><input id="contentStart" type="date" required class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-rose-500 focus:outline-none"></div>
+                    <div><label for="contentEnd" class="block mb-2 text-xs font-bold text-slate-600">TARIKH TAMAT</label><input id="contentEnd" type="date" class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-rose-500 focus:outline-none"></div>
+                </div>
+                <div id="calendarExtraFields" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div><label for="contentTime" class="block mb-2 text-xs font-bold text-slate-600">MASA</label><input id="contentTime" type="time" class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-violet-500 focus:outline-none"></div>
+                    <div><label for="contentPlace" class="block mb-2 text-xs font-bold text-slate-600">TEMPAT</label><input id="contentPlace" maxlength="120" placeholder="Contoh: Dewan SK Temin" class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-violet-500 focus:outline-none"></div>
+                </div>
+                <div><label for="contentLinks" class="block mb-2 text-xs font-bold text-slate-600">PAUTAN <span class="font-normal text-slate-400">(pilihan, satu pautan setiap baris)</span></label><textarea id="contentLinks" rows="3" placeholder="Pertandingan Mewarna | https://...&#10;Kuiz Kemerdekaan | https://..." class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm font-mono focus:border-rose-500 focus:outline-none"></textarea><p class="mt-1.5 text-[10px] text-slate-400">Format: Nama butang | pautan. Sesuai untuk memasukkan beberapa pertandingan.</p></div>
+                <div><label for="contentPublishKey" class="block mb-2 text-xs font-bold text-slate-600">KUNCI PENERBITAN</label><input id="contentPublishKey" type="password" required autocomplete="off" placeholder="Kunci yang ditetapkan dalam Apps Script" class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-rose-500 focus:outline-none"></div>
+                <p id="contentFormStatus" class="hidden rounded-2xl p-3 text-xs font-semibold"></p>
+                <div class="flex gap-3"><button id="contentSubmitButton" type="submit" class="flex-1 rounded-2xl bg-rose-600 hover:bg-rose-700 py-3.5 text-sm font-bold text-white"><i class="fas fa-paper-plane mr-2"></i>Terbitkan</button><button type="button" onclick="closeContentManager()" class="rounded-2xl bg-slate-100 px-5 text-xs font-bold text-slate-600">Batal</button></div>
+            </form>
+        </div>
+    </div>
+
     <!-- Butang pemasangan PWA -->
     <button id="installAppButton" type="button" class="hidden fixed right-4 bottom-4 z-[70] items-center gap-2 rounded-2xl bg-sktBlue px-4 py-3 text-xs font-extrabold text-white shadow-2xl shadow-blue-950/30 hover:bg-[#0b3d69] transition" aria-label="Pasang aplikasi TEMIN HUB">
         <i class="fas fa-download"></i><span>Install App</span>
@@ -726,7 +757,7 @@
     <footer class="mt-16 bg-[#072b4b] text-blue-100/70 px-4 py-10 text-center border-t border-white/5">
         <div class="max-w-4xl mx-auto">
             <img src="logo-sk-temin.png" alt="" aria-hidden="true" class="w-12 h-12 object-contain mx-auto opacity-90">
-            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.2.5 PWA</p>
+            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.3 PWA</p>
             <p class="mt-1.5 text-xs text-sktYellow font-semibold">&copy; SK Temin | Unit ICT</p>
             <div class="mx-auto my-5 h-px max-w-xs bg-white/10"></div>
             <p class="text-[10px] md:text-[11px] text-blue-100/55">
@@ -755,6 +786,9 @@
         // Google Apps Script Web App URL anda disimpan di sini secara kekal!
         const DEFAULT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxXvBdr1tFe2atfNNl6EYTMwqxTwuGa_7SJfRWZW1e3tGdLJkwir15CV3OleW-Citd6/exec";
         let webAppUrl = DEFAULT_WEB_APP_URL;
+
+        // Tampal URL deployment Apps Script Pengumuman & Takwim di antara tanda petik.
+        const CONTENT_API_URL = "https://script.google.com/macros/s/AKfycbzBqJM0VXq2vlL_r4wHmhgG5asib50bNIFMXWBKb7fYMRBnBc18kx1q3yvf75tkwwnU/exec";
         
         let currentMultipleMatches = [];
         let isAdminAuthenticated = false; // Status log masuk keselamatan admin
@@ -857,6 +891,131 @@
             document.body.style.overflow = '';
         }
 
+        function openContentManager() {
+            const modal = document.getElementById('contentManagerModal');
+            document.getElementById('contentFormStatus').classList.add('hidden');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            toggleContentFields();
+        }
+
+        function closeContentManager() {
+            const modal = document.getElementById('contentManagerModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        function toggleContentFields() {
+            const isCalendar = document.getElementById('contentType').value === 'TAKWIM';
+            document.getElementById('calendarExtraFields').classList.toggle('hidden', !isCalendar);
+        }
+
+        function setContentFormStatus(message, isError) {
+            const box = document.getElementById('contentFormStatus');
+            box.textContent = message;
+            box.className = `rounded-2xl p-3 text-xs font-semibold ${isError ? 'bg-red-50 text-red-700' : 'bg-emerald-50 text-emerald-700'}`;
+        }
+
+        async function publishContent(event) {
+            event.preventDefault();
+            if (!CONTENT_API_URL) {
+                setContentFormStatus('Sambungan Apps Script belum ditetapkan. Lengkapkan langkah pemasangan backend dahulu.', true);
+                return;
+            }
+            const start = document.getElementById('contentStart').value;
+            const end = document.getElementById('contentEnd').value;
+            if (end && end < start) {
+                setContentFormStatus('Tarikh tamat tidak boleh lebih awal daripada tarikh mula.', true);
+                return;
+            }
+            const button = document.getElementById('contentSubmitButton');
+            button.disabled = true;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Menerbitkan...';
+            const payload = new URLSearchParams({
+                action: 'publish',
+                key: document.getElementById('contentPublishKey').value,
+                type: document.getElementById('contentType').value,
+                target: document.getElementById('contentTarget').value,
+                title: document.getElementById('contentTitle').value.trim(),
+                description: document.getElementById('contentDescription').value.trim(),
+                start: start,
+                end: end,
+                time: document.getElementById('contentTime').value,
+                place: document.getElementById('contentPlace').value.trim(),
+                links: document.getElementById('contentLinks').value.trim()
+            });
+            try {
+                const response = await fetch(CONTENT_API_URL, { method: 'POST', body: payload });
+                const result = await response.json();
+                if (!result.ok) throw new Error(result.error || 'Penerbitan gagal.');
+                setContentFormStatus('Kandungan berjaya diterbitkan dan akan dipaparkan pada Dashboard.', false);
+                document.getElementById('contentManagerForm').reset();
+                toggleContentFields();
+                loadPublishedContent();
+            } catch (error) {
+                setContentFormStatus(error.message || 'Sambungan gagal. Sila cuba semula.', true);
+            } finally {
+                button.disabled = false;
+                button.innerHTML = '<i class="fas fa-paper-plane mr-2"></i>Terbitkan';
+            }
+        }
+
+        function formatContentDate(value) {
+            if (!value) return '';
+            const date = new Date(`${value}T00:00:00`);
+            return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString('ms-MY', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        function createContentCard(item, calendarMode) {
+            const card = document.createElement('article');
+            card.className = `rounded-2xl border p-4 ${calendarMode ? 'border-violet-100 bg-violet-50/60' : 'border-rose-100 bg-rose-50/60'}`;
+            const title = document.createElement('h4');
+            title.className = 'text-sm font-extrabold text-slate-800';
+            title.textContent = item.title;
+            const meta = document.createElement('p');
+            meta.className = `mt-1 text-[10px] font-bold ${calendarMode ? 'text-violet-700' : 'text-rose-700'}`;
+            meta.textContent = [formatContentDate(item.start), item.time, item.place, item.target && `Untuk: ${item.target}`].filter(Boolean).join(' • ');
+            const description = document.createElement('p');
+            description.className = 'mt-2 text-xs leading-relaxed text-slate-600 whitespace-pre-line';
+            description.textContent = item.description;
+            card.append(title, meta, description);
+            (item.links || []).forEach(link => {
+                if (!/^https:\/\//i.test(link.url || '')) return;
+                const anchor = document.createElement('a');
+                anchor.href = link.url;
+                anchor.target = '_blank';
+                anchor.rel = 'noopener noreferrer';
+                anchor.className = `mt-3 mr-2 inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-[10px] font-extrabold text-white ${calendarMode ? 'bg-violet-600' : 'bg-rose-600'}`;
+                anchor.textContent = link.label || 'Buka Pautan';
+                card.appendChild(anchor);
+            });
+            return card;
+        }
+
+        async function loadPublishedContent() {
+            const announcementList = document.getElementById('announcementList');
+            const calendarList = document.getElementById('calendarList');
+            if (!CONTENT_API_URL) {
+                announcementList.innerHTML = '<p class="rounded-2xl bg-slate-50 p-4 text-xs text-slate-500">Pengumuman belum disambungkan.</p>';
+                calendarList.innerHTML = '<p class="rounded-2xl bg-slate-50 p-4 text-xs text-slate-500">Takwim belum disambungkan.</p>';
+                return;
+            }
+            try {
+                const response = await fetch(`${CONTENT_API_URL}?action=list&t=${Date.now()}`, { cache: 'no-store' });
+                const result = await response.json();
+                if (!result.ok) throw new Error(result.error || 'Data gagal dimuatkan.');
+                const announcements = result.items.filter(item => item.type === 'PENGUMUMAN').slice(0, 3);
+                const calendar = result.items.filter(item => item.type === 'TAKWIM').slice(0, 5);
+                announcementList.replaceChildren(...(announcements.length ? announcements.map(item => createContentCard(item, false)) : [Object.assign(document.createElement('p'), { className: 'rounded-2xl bg-slate-50 p-4 text-xs text-slate-500', textContent: 'Tiada pengumuman baharu buat masa ini.' })]));
+                calendarList.replaceChildren(...(calendar.length ? calendar.map(item => createContentCard(item, true)) : [Object.assign(document.createElement('p'), { className: 'rounded-2xl bg-slate-50 p-4 text-xs text-slate-500', textContent: 'Tiada aktiviti akan datang.' })]));
+            } catch (error) {
+                announcementList.innerHTML = '<p class="rounded-2xl bg-red-50 p-4 text-xs text-red-600">Pengumuman tidak dapat dimuatkan.</p>';
+                calendarList.innerHTML = '<p class="rounded-2xl bg-red-50 p-4 text-xs text-red-600">Takwim tidak dapat dimuatkan.</p>';
+            }
+        }
+
         const EPIBG_LINKS = {
             parent: 'https://script.google.com/macros/s/AKfycbxGnL-pbua1Pj29I_Xnav8bDd06o37AAsbj1zcxX0ozYYuHxtpol1rEbr1t2Sbmf_E/exec?portal=parent',
             donation: 'https://script.google.com/macros/s/AKfycbxGnL-pbua1Pj29I_Xnav8bDd06o37AAsbj1zcxX0ozYYuHxtpol1rEbr1t2Sbmf_E/exec?portal=donation',
@@ -914,6 +1073,7 @@
             document.getElementById('input-webAppUrl').value = webAppUrl;
             updateDataSourceIndicator(true);
             showPortalView('dashboard');
+            loadPublishedContent();
 
             // Akses admin tersembunyi: klik/ketik logo SK Temin 3 kali.
             const schoolLogo = document.getElementById('schoolLogo');

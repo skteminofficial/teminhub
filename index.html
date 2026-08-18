@@ -150,27 +150,9 @@
             border-radius: 9999px; background: rgba(255,255,255,.14); transition: transform .3s ease; z-index: -1;
         }
         .portal-menu-card:hover::before { transform: scale(1.35); }
-        #portalNav button { min-height: 72px; font-size: 12px; }
-        #portalNav button i { font-size: 20px; margin-bottom: 6px; }
-        #nav-dashboard { color: #475569; background: #f1f5f9; }
-        #nav-murid { color: #1d4ed8; background: #dbeafe; }
-        #nav-guru { color: #047857; background: #d1fae5; }
-        #nav-ibubapa { color: #b45309; background: #fef3c7; }
-
-        #nav-dashboard.portal-nav-active { background: #475569; color: white !important; box-shadow: 0 10px 25px rgba(71,85,105,.22); }
-        #nav-murid.portal-nav-active { background: #2563eb; color: white !important; box-shadow: 0 10px 25px rgba(37,99,235,.25); }
-        #nav-guru.portal-nav-active { background: #059669; color: white !important; box-shadow: 0 10px 25px rgba(5,150,105,.25); }
-        #nav-ibubapa.portal-nav-active { background: #d97706; color: white !important; box-shadow: 0 10px 25px rgba(217,119,6,.25); }
-
-        @media (min-width: 768px) {
-            #portalNav button { min-height: 78px; font-size: 13px; }
-            #portalNav button i { font-size: 22px; }
-        }
+        .portal-nav-active { background: #0f4c81; color: white; box-shadow: 0 10px 25px rgba(15,76,129,.22); }
         .service-card { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
         .service-card:hover { transform: translateY(-3px); box-shadow: 0 16px 35px rgba(15,76,129,.11); border-color: rgba(15,76,129,.22); }
-        .subject-card { transition: transform .2s ease, box-shadow .2s ease; }
-        .subject-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(15,76,129,.10); }
-        .subject-card:active { transform: scale(.98); }
 
     </style>
 </head>
@@ -292,7 +274,8 @@
                 <a href="https://ains.moe.gov.my/login?returnUrl=/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg"><i class="fas fa-book-open"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">AINS NILAM</span><span class="mt-1 block text-[10px] text-slate-400">Rekod bacaan murid</span></a>
                 <a href="https://classroom.google.com/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-green-100 text-green-700 flex items-center justify-center text-lg"><i class="fas fa-chalkboard"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Google Classroom</span><span class="mt-1 block text-[10px] text-slate-400">Kelas dan tugasan</span></a>
                 <a href="https://accounts.google.com/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center text-lg"><i class="fab fa-google"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Google</span><span class="mt-1 block text-[10px] text-slate-400">Akaun Google murid</span></a>
-                <button type="button" onclick="openLearningMenu()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-violet-100 text-violet-700 flex items-center justify-center text-lg"><i class="fas fa-book"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Pembelajaran</span><span class="mt-1 block text-[10px] text-slate-400">Pilih subjek Tahun 1–6</span></button>
+                <a href="https://rekod-komputer-murid.g-89147208.chatgpt.site/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center text-lg"><i class="fas fa-desktop"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Rekod Komputer</span><span class="mt-1 block text-[10px] text-slate-400">Catat penggunaan komputer</span></a>
+                <button type="button" onclick="showComingSoon('Pautan Pembelajaran')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-violet-100 text-violet-700 flex items-center justify-center text-lg"><i class="fas fa-book"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Pembelajaran</span><span class="mt-1 block text-[10px] text-slate-400">Pautan akan ditambah</span></button>
             </div>
         </section>
 
@@ -335,7 +318,7 @@
                 <button type="button" onclick="openDelimaModule()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-blue-100 text-sktBlue flex items-center justify-center"><i class="fas fa-id-card"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">DELIMa Anak</span></button>
                 <button type="button" onclick="showComingSoon('Kokurikulum Anak')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-medal"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Kokurikulum</span></button>
                 <button type="button" onclick="showComingSoon('Rumah Sukan')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center"><i class="fas fa-flag"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Rumah Sukan</span></button>
-                <button type="button" onclick="openParentIdmeHelp()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-violet-100 text-violet-700 flex items-center justify-center text-lg"><i class="fas fa-key"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">IDMe</span><span class="mt-1 block text-[10px] text-slate-400">Log masuk & bantuan akaun</span></button>
+                <a href="https://idme.moe.gov.my/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-violet-100 text-violet-700 flex items-center justify-center"><i class="fas fa-key"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">IDMe</span></a>
                 <button type="button" onclick="showComingSoon('Maklumat Kelas')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center"><i class="fas fa-school"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Kelas Anak</span></button>
                 <button type="button" onclick="showComingSoon('Guru Kelas')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-orange-100 text-orange-700 flex items-center justify-center"><i class="fas fa-user-tie"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Guru Kelas</span></button>
             </div>
@@ -674,114 +657,6 @@
         </div>
     </main>
 
-
-
-    <!-- Menu Pembelajaran Murid -->
-    <div id="learningMenuModal" class="hidden fixed inset-0 z-[86] bg-slate-950/60 backdrop-blur-sm px-4 py-6 items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="learningMenuTitle">
-        <div class="w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-[2rem] bg-white p-5 md:p-7 shadow-2xl border border-white/80">
-            <div class="flex items-start justify-between gap-3">
-                <div class="flex items-center gap-3">
-                    <span class="w-12 h-12 rounded-2xl bg-violet-100 text-violet-700 flex items-center justify-center text-lg"><i class="fas fa-book-open-reader"></i></span>
-                    <div>
-                        <h2 id="learningMenuTitle" class="text-xl font-extrabold text-slate-800 font-title">Pembelajaran Murid</h2>
-                        <p class="text-xs text-slate-500">Pilih tahap dan subjek untuk mula belajar.</p>
-                    </div>
-                </div>
-                <button type="button" onclick="closeLearningMenu()" class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 transition" aria-label="Tutup"><i class="fas fa-times"></i></button>
-            </div>
-
-            <div class="mt-5 grid grid-cols-2 gap-2 rounded-2xl bg-slate-100 p-1.5">
-                <button id="learningTab1" type="button" onclick="showLearningStage(1)" class="rounded-xl bg-blue-600 text-white py-3 px-3 text-xs md:text-sm font-extrabold shadow-sm transition">
-                    <i class="fas fa-child-reaching mr-1.5"></i>Tahap 1
-                    <span class="block text-[9px] md:text-[10px] font-semibold opacity-80">Tahun 1–3</span>
-                </button>
-                <button id="learningTab2" type="button" onclick="showLearningStage(2)" class="rounded-xl bg-white text-slate-600 py-3 px-3 text-xs md:text-sm font-extrabold shadow-sm transition">
-                    <i class="fas fa-user-graduate mr-1.5"></i>Tahap 2
-                    <span class="block text-[9px] md:text-[10px] font-semibold opacity-70">Tahun 4–6</span>
-                </button>
-            </div>
-
-            <div id="learningStage1" class="mt-5">
-                <div class="mb-3 flex items-center justify-between gap-3">
-                    <div><h3 class="font-extrabold text-slate-800">Subjek Tahap 1</h3><p class="text-[10px] text-slate-400">Tahun 1 hingga Tahun 3</p></div>
-                    <span class="rounded-full bg-blue-50 text-blue-700 px-3 py-1 text-[10px] font-bold">9 SUBJEK</span>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                    <button type="button" onclick="showSubjectComingSoon('Bahasa Melayu')" class="subject-card rounded-2xl border border-rose-100 bg-rose-50 p-4 text-center"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-rose-600 flex items-center justify-center text-lg"><i class="fas fa-language"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">Bahasa Melayu</span><span class="mt-1 block text-[9px] text-slate-400">Akan ditambah</span></button>
-                    <button type="button" onclick="showSubjectComingSoon('Bahasa Inggeris')" class="subject-card rounded-2xl border border-indigo-100 bg-indigo-50 p-4 text-center"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-indigo-600 flex items-center justify-center text-lg"><i class="fas fa-a"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">Bahasa Inggeris</span><span class="mt-1 block text-[9px] text-slate-400">Akan ditambah</span></button>
-                    <a href="https://butcroloq.github.io/mtgame/tahap-1/" target="_blank" rel="noopener noreferrer" class="subject-card rounded-2xl border-2 border-blue-200 bg-blue-50 p-4 text-center shadow-sm"><span class="mx-auto w-11 h-11 rounded-xl bg-blue-600 text-white flex items-center justify-center text-lg"><i class="fas fa-calculator"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">Matematik</span><span class="mt-1 block text-[9px] font-bold text-blue-600"><i class="fas fa-play mr-1"></i>Buka sekarang</span></a>
-                    <button type="button" onclick="showSubjectComingSoon('Sains')" class="subject-card rounded-2xl border border-emerald-100 bg-emerald-50 p-4 text-center"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-emerald-600 flex items-center justify-center text-lg"><i class="fas fa-flask"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">Sains</span><span class="mt-1 block text-[9px] text-slate-400">Akan ditambah</span></button>
-                    <button type="button" onclick="showSubjectComingSoon('Pendidikan Islam')" class="subject-card rounded-2xl border border-teal-100 bg-teal-50 p-4 text-center"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-teal-700 flex items-center justify-center text-lg"><i class="fas fa-mosque"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">Pendidikan Islam</span><span class="mt-1 block text-[9px] text-slate-400">Akan ditambah</span></button>
-                    <button type="button" onclick="showSubjectComingSoon('Bahasa Arab')" class="subject-card rounded-2xl border border-amber-100 bg-amber-50 p-4 text-center"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-amber-700 flex items-center justify-center text-lg"><i class="fas fa-book-quran"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">Bahasa Arab</span><span class="mt-1 block text-[9px] text-slate-400">Akan ditambah</span></button>
-                    <button type="button" onclick="showSubjectComingSoon('Pendidikan Muzik')" class="subject-card rounded-2xl border border-fuchsia-100 bg-fuchsia-50 p-4 text-center"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-fuchsia-600 flex items-center justify-center text-lg"><i class="fas fa-music"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">Pendidikan Muzik</span><span class="mt-1 block text-[9px] text-slate-400">Akan ditambah</span></button>
-                    <button type="button" onclick="showSubjectComingSoon('PJPK')" class="subject-card rounded-2xl border border-orange-100 bg-orange-50 p-4 text-center"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-orange-600 flex items-center justify-center text-lg"><i class="fas fa-person-running"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">PJPK</span><span class="mt-1 block text-[9px] text-slate-400">Akan ditambah</span></button>
-                    <button type="button" onclick="showSubjectComingSoon('Pendidikan Seni Visual')" class="subject-card rounded-2xl border border-cyan-100 bg-cyan-50 p-4 text-center"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-cyan-700 flex items-center justify-center text-lg"><i class="fas fa-palette"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">PSV</span><span class="mt-1 block text-[9px] text-slate-400">Akan ditambah</span></button>
-                </div>
-            </div>
-
-            <div id="learningStage2" class="hidden mt-5">
-                <div class="mb-3 flex items-center justify-between gap-3">
-                    <div><h3 class="font-extrabold text-slate-800">Subjek Tahap 2</h3><p class="text-[10px] text-slate-400">Tahun 4 hingga Tahun 6</p></div>
-                    <span class="rounded-full bg-emerald-50 text-emerald-700 px-3 py-1 text-[10px] font-bold">11 SUBJEK</span>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                    <button type="button" onclick="showSubjectComingSoon('Bahasa Melayu')" class="subject-card rounded-2xl border border-rose-100 bg-rose-50 p-4 text-center"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-rose-600 flex items-center justify-center text-lg"><i class="fas fa-language"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">Bahasa Melayu</span><span class="mt-1 block text-[9px] text-slate-400">Akan ditambah</span></button>
-                    <button type="button" onclick="showSubjectComingSoon('Bahasa Inggeris')" class="subject-card rounded-2xl border border-indigo-100 bg-indigo-50 p-4 text-center"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-indigo-600 flex items-center justify-center text-lg"><i class="fas fa-a"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">Bahasa Inggeris</span><span class="mt-1 block text-[9px] text-slate-400">Akan ditambah</span></button>
-                    <a href="https://butcroloq.github.io/mtgame/tahap-2/" target="_blank" rel="noopener noreferrer" class="subject-card rounded-2xl border-2 border-blue-200 bg-blue-50 p-4 text-center shadow-sm"><span class="mx-auto w-11 h-11 rounded-xl bg-blue-600 text-white flex items-center justify-center text-lg"><i class="fas fa-calculator"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">Matematik</span><span class="mt-1 block text-[9px] font-bold text-blue-600"><i class="fas fa-play mr-1"></i>Buka sekarang</span></a>
-                    <button type="button" onclick="showSubjectComingSoon('Sains')" class="subject-card rounded-2xl border border-emerald-100 bg-emerald-50 p-4 text-center"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-emerald-600 flex items-center justify-center text-lg"><i class="fas fa-flask"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">Sains</span><span class="mt-1 block text-[9px] text-slate-400">Akan ditambah</span></button>
-                    <button type="button" onclick="showSubjectComingSoon('Sejarah')" class="subject-card rounded-2xl border border-yellow-100 bg-yellow-50 p-4 text-center"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-yellow-700 flex items-center justify-center text-lg"><i class="fas fa-landmark"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">Sejarah</span><span class="mt-1 block text-[9px] text-slate-400">Akan ditambah</span></button>
-                    <button type="button" onclick="showSubjectComingSoon('Pendidikan Islam')" class="subject-card rounded-2xl border border-teal-100 bg-teal-50 p-4 text-center"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-teal-700 flex items-center justify-center text-lg"><i class="fas fa-mosque"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">Pendidikan Islam</span><span class="mt-1 block text-[9px] text-slate-400">Akan ditambah</span></button>
-                    <button type="button" onclick="showSubjectComingSoon('Bahasa Arab')" class="subject-card rounded-2xl border border-amber-100 bg-amber-50 p-4 text-center"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-amber-700 flex items-center justify-center text-lg"><i class="fas fa-book-quran"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">Bahasa Arab</span><span class="mt-1 block text-[9px] text-slate-400">Akan ditambah</span></button>
-                    <button type="button" onclick="showSubjectComingSoon('Pendidikan Muzik')" class="subject-card rounded-2xl border border-fuchsia-100 bg-fuchsia-50 p-4 text-center"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-fuchsia-600 flex items-center justify-center text-lg"><i class="fas fa-music"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">Pendidikan Muzik</span><span class="mt-1 block text-[9px] text-slate-400">Akan ditambah</span></button>
-                    <button type="button" onclick="showSubjectComingSoon('PJPK')" class="subject-card rounded-2xl border border-orange-100 bg-orange-50 p-4 text-center"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-orange-600 flex items-center justify-center text-lg"><i class="fas fa-person-running"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">PJPK</span><span class="mt-1 block text-[9px] text-slate-400">Akan ditambah</span></button>
-                    <button type="button" onclick="showSubjectComingSoon('Pendidikan Seni Visual')" class="subject-card rounded-2xl border border-cyan-100 bg-cyan-50 p-4 text-center"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-cyan-700 flex items-center justify-center text-lg"><i class="fas fa-palette"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">PSV</span><span class="mt-1 block text-[9px] text-slate-400">Akan ditambah</span></button>
-                    <button type="button" onclick="showSubjectComingSoon('Reka Bentuk dan Teknologi')" class="subject-card rounded-2xl border border-slate-200 bg-slate-50 p-4 text-center"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-slate-700 flex items-center justify-center text-lg"><i class="fas fa-screwdriver-wrench"></i></span><span class="mt-2 block text-xs font-extrabold text-slate-800">RBT</span><span class="mt-1 block text-[9px] text-slate-400">Akan ditambah</span></button>
-                </div>
-            </div>
-
-            <div class="mt-5 rounded-2xl border border-blue-100 bg-blue-50 px-4 py-3 text-[10px] md:text-xs text-slate-600">
-                <i class="fas fa-circle-info mr-1.5 text-blue-600"></i>
-                Buat masa ini <strong>Matematik</strong> sudah tersedia. Subjek lain akan ditambah secara berperingkat.
-            </div>
-        </div>
-    </div>
-
-    <!-- Bantuan IDMe untuk Ibu Bapa -->
-    <div id="parentIdmeHelpModal" class="hidden fixed inset-0 z-[85] bg-slate-950/60 backdrop-blur-sm px-4 py-6 items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="parentIdmeHelpTitle">
-        <div class="w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-[2rem] bg-white p-5 md:p-7 shadow-2xl border border-white/80">
-            <div class="flex items-start justify-between gap-3">
-                <div class="flex items-center gap-3">
-                    <span class="w-12 h-12 rounded-2xl bg-violet-100 text-violet-700 flex items-center justify-center text-lg"><i class="fas fa-key"></i></span>
-                    <div><h2 id="parentIdmeHelpTitle" class="text-lg font-extrabold text-slate-800 font-title">IDMe Ibu Bapa</h2><p class="text-xs text-slate-500">Log masuk atau dapatkan bantuan akaun.</p></div>
-                </div>
-                <button type="button" onclick="closeParentIdmeHelp()" class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 transition" aria-label="Tutup"><i class="fas fa-times"></i></button>
-            </div>
-
-            <a href="https://idme.moe.gov.my/" target="_blank" rel="noopener noreferrer" class="mt-5 flex items-center justify-center gap-2 w-full rounded-2xl bg-violet-700 hover:bg-violet-800 text-white font-bold py-3.5 px-4 transition"><i class="fas fa-arrow-up-right-from-square"></i> Log Masuk IDMe</a>
-
-            <div class="mt-4 rounded-2xl border border-amber-200 bg-amber-50 p-4">
-                <h3 class="text-sm font-extrabold text-amber-900"><i class="fas fa-lock-open mr-1.5"></i>Lupa Kata Laluan?</h3>
-                <p class="mt-1.5 text-xs text-amber-800 leading-relaxed">Ikuti panduan langkah demi langkah melalui video di bawah.</p>
-                <a href="https://youtu.be/351lQqH8ACo?si=_Jof4rX3LaWum4_b" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 rounded-xl bg-red-600 hover:bg-red-700 text-white px-4 py-2.5 text-xs font-extrabold transition"><i class="fab fa-youtube"></i> Tonton Panduan YouTube</a>
-            </div>
-
-            <div class="mt-3 rounded-2xl border border-blue-200 bg-blue-50 p-4">
-                <h3 class="text-sm font-extrabold text-sktBlue"><i class="fas fa-envelope-circle-check mr-1.5"></i>Lupa / Tidak Lagi Guna E-mel Lama?</h3>
-                <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">Contohnya selepas bertukar telefon dan e-mel lama tidak lagi digunakan.</p>
-                <ol class="mt-3 space-y-2 text-xs text-slate-700">
-                    <li><strong>1.</strong> Buka Portal Aduan MOEIS.</li>
-                    <li><strong>2.</strong> Pilih <strong>FORGOT PASSWORD</strong>.</li>
-                    <li><strong>3.</strong> Pada <strong>USERNAME</strong>, masukkan <strong>No. Kad Pengenalan (IC)</strong>.</li>
-                    <li><strong>4.</strong> Klik <strong>SEND MAIL</strong>.</li>
-                    <li><strong>5.</strong> Jika masih tidak berjaya kerana e-mel lama tidak boleh diakses, pilih <strong>DAFTAR BARU</strong> dan gunakan <strong>e-mel baharu yang aktif</strong>.</li>
-                </ol>
-                <a href="https://aduanmoeis.moe.gov.my/" target="_blank" rel="noopener noreferrer" class="mt-4 flex items-center justify-center gap-2 w-full rounded-xl bg-sktBlue hover:bg-blue-800 text-white px-4 py-3 text-xs font-extrabold transition"><i class="fas fa-headset"></i> Buka Portal Aduan MOEIS</a>
-            </div>
-
-            <p class="mt-4 text-[10px] text-center text-slate-400 leading-relaxed">Pastikan e-mel baharu yang digunakan masih aktif dan boleh diakses untuk urusan pemulihan akaun.</p>
-        </div>
-    </div>
-
     <!-- Kunci akses asas Portal Guru -->
     <div id="teacherLoginModal" class="hidden fixed inset-0 z-[80] bg-slate-950/60 backdrop-blur-sm px-4 py-8 items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="teacherLoginTitle">
         <div class="w-full max-w-sm rounded-[2rem] bg-white p-6 md:p-7 shadow-2xl border border-white/80">
@@ -816,7 +691,7 @@
                     <button type="button" onclick="copyEpibgLink('teacher')" class="mt-2 w-full rounded-xl border border-emerald-200 bg-white px-3 py-2.5 text-[10px] font-extrabold text-emerald-700 hover:bg-emerald-100 transition"><i class="fas fa-copy mr-1.5"></i>Salin Pautan</button>
                 </div>
                 <div class="rounded-2xl border border-amber-100 bg-amber-50 p-3 text-center">
-                    <a href="https://script.google.com/a/macros/moe-dl.edu.my/s/AKfycbwlndyEYZk5fEa0lt3TfT-BZSkBzS-5XJANIFek6xSp8TZA2ckpXjkNfrb_CLnrIPIa/exec" target="_blank" rel="noopener noreferrer" onclick="closeEpibgMenu()" class="block rounded-xl p-2 hover:bg-amber-100 transition"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-amber-700 flex items-center justify-center shadow-sm"><i class="fas fa-coins"></i></span><span class="mt-3 block text-sm font-extrabold text-slate-800">Bendahari PIBG</span><span class="mt-1 block text-[10px] text-slate-500">Pengurusan dan semakan kewangan</span><span class="mt-3 inline-flex items-center gap-1.5 text-[10px] font-extrabold text-amber-700"><i class="fas fa-arrow-up-right-from-square"></i>Buka Portal</span></a>
+                    <a href="https://script.google.com/macros/s/AKfycbxGnL-pbua1Pj29I_Xnav8bDd06o37AAsbj1zcxX0ozYYuHxtpol1rEbr1t2Sbmf_E/exec" target="_blank" rel="noopener noreferrer" onclick="closeEpibgMenu()" class="block rounded-xl p-2 hover:bg-amber-100 transition"><span class="mx-auto w-11 h-11 rounded-xl bg-white text-amber-700 flex items-center justify-center shadow-sm"><i class="fas fa-coins"></i></span><span class="mt-3 block text-sm font-extrabold text-slate-800">Bendahari PIBG</span><span class="mt-1 block text-[10px] text-slate-500">Pengurusan dan semakan kewangan</span><span class="mt-3 inline-flex items-center gap-1.5 text-[10px] font-extrabold text-amber-700"><i class="fas fa-arrow-up-right-from-square"></i>Buka Portal</span></a>
                     <button type="button" onclick="copyEpibgLink('treasurer')" class="mt-2 w-full rounded-xl border border-amber-200 bg-white px-3 py-2.5 text-[10px] font-extrabold text-amber-700 hover:bg-amber-100 transition"><i class="fas fa-copy mr-1.5"></i>Salin Pautan</button>
                 </div>
             </div>
@@ -851,7 +726,7 @@
     <footer class="mt-16 bg-[#072b4b] text-blue-100/70 px-4 py-10 text-center border-t border-white/5">
         <div class="max-w-4xl mx-auto">
             <img src="logo-sk-temin.png" alt="" aria-hidden="true" class="w-12 h-12 object-contain mx-auto opacity-90">
-            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.2.4 PWA</p>
+            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.2.5 PWA</p>
             <p class="mt-1.5 text-xs text-sktYellow font-semibold">&copy; SK Temin | Unit ICT</p>
             <div class="mx-auto my-5 h-px max-w-xs bg-white/10"></div>
             <p class="text-[10px] md:text-[11px] text-blue-100/55">
@@ -891,6 +766,7 @@
                 const button = document.getElementById(`nav-${id}`);
                 if (!button) return;
                 button.classList.toggle('portal-nav-active', id === viewId);
+                button.classList.toggle('text-slate-500', id !== viewId);
             });
         }
 
@@ -1617,89 +1493,5 @@ window.copyAll = function () {
             if (requestedPortal === 'ibubapa') showPortalView('ibubapa');
         });
     </script>
-
-    <script>
-        function openParentIdmeHelp() {
-            const modal = document.getElementById('parentIdmeHelpModal');
-            if (!modal) return;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeParentIdmeHelp() {
-            const modal = document.getElementById('parentIdmeHelpModal');
-            if (!modal) return;
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            document.body.style.overflow = '';
-        }
-        document.addEventListener('click', function(event) {
-            const modal = document.getElementById('parentIdmeHelpModal');
-            if (modal && event.target === modal) closeParentIdmeHelp();
-        });
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') closeParentIdmeHelp();
-        });
-    </script>
-
-
-    <script>
-        function openLearningMenu() {
-            const modal = document.getElementById('learningMenuModal');
-            if (!modal) return;
-            showLearningStage(1);
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLearningMenu() {
-            const modal = document.getElementById('learningMenuModal');
-            if (!modal) return;
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            document.body.style.overflow = '';
-        }
-
-        function showLearningStage(stage) {
-            const stage1 = document.getElementById('learningStage1');
-            const stage2 = document.getElementById('learningStage2');
-            const tab1 = document.getElementById('learningTab1');
-            const tab2 = document.getElementById('learningTab2');
-            if (!stage1 || !stage2 || !tab1 || !tab2) return;
-
-            const isStage1 = Number(stage) === 1;
-            stage1.classList.toggle('hidden', !isStage1);
-            stage2.classList.toggle('hidden', isStage1);
-
-            tab1.className = isStage1
-                ? 'rounded-xl bg-blue-600 text-white py-3 px-3 text-xs md:text-sm font-extrabold shadow-sm transition'
-                : 'rounded-xl bg-white text-slate-600 py-3 px-3 text-xs md:text-sm font-extrabold shadow-sm transition';
-
-            tab2.className = !isStage1
-                ? 'rounded-xl bg-emerald-600 text-white py-3 px-3 text-xs md:text-sm font-extrabold shadow-sm transition'
-                : 'rounded-xl bg-white text-slate-600 py-3 px-3 text-xs md:text-sm font-extrabold shadow-sm transition';
-        }
-
-        function showSubjectComingSoon(subjectName) {
-            if (typeof showToast === 'function') {
-                showToast(subjectName + ' akan ditambah kemudian.', 'info');
-            } else if (typeof showComingSoon === 'function') {
-                showComingSoon(subjectName);
-            } else {
-                alert(subjectName + ' akan ditambah kemudian.');
-            }
-        }
-
-        document.addEventListener('click', function(event) {
-            const modal = document.getElementById('learningMenuModal');
-            if (modal && event.target === modal) closeLearningMenu();
-        });
-
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') closeLearningMenu();
-        });
-    </script>
-
 </body>
 </html>

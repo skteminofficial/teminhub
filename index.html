@@ -728,6 +728,7 @@
                 </div>
                 <div><label for="contentLinks" class="block mb-2 text-xs font-bold text-slate-600">PAUTAN <span class="font-normal text-slate-400">(pilihan, satu pautan setiap baris)</span></label><textarea id="contentLinks" rows="3" placeholder="Pertandingan Mewarna | https://...&#10;Kuiz Kemerdekaan | https://..." class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm font-mono focus:border-rose-500 focus:outline-none"></textarea><p class="mt-1.5 text-[10px] text-slate-400">Format: Nama butang | pautan. Sesuai untuk memasukkan beberapa pertandingan.</p></div>
                 <div><label for="contentPublishKey" class="block mb-2 text-xs font-bold text-slate-600">KUNCI PENERBITAN</label><input id="contentPublishKey" type="password" required autocomplete="off" placeholder="Kunci yang ditetapkan dalam Apps Script" class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-rose-500 focus:outline-none"></div>
+                <label class="flex items-center gap-3 rounded-2xl border border-rose-100 bg-rose-50/70 px-4 py-3 cursor-pointer"><input id="rememberContentKey" type="checkbox" class="h-4 w-4 rounded border-slate-300 text-rose-600 focus:ring-rose-500"><span><span class="block text-xs font-bold text-slate-700">Ingat kunci pada peranti ini</span><span class="block mt-0.5 text-[10px] text-slate-500">Jangan pilih pada telefon atau komputer yang dikongsi.</span></span></label>
                 <p id="contentFormStatus" class="hidden rounded-2xl p-3 text-xs font-semibold"></p>
                 <div class="flex gap-3"><button id="contentSubmitButton" type="submit" class="flex-1 rounded-2xl bg-rose-600 hover:bg-rose-700 py-3.5 text-sm font-bold text-white"><i class="fas fa-paper-plane mr-2"></i>Terbitkan</button><button type="button" onclick="closeContentManager()" class="rounded-2xl bg-slate-100 px-5 text-xs font-bold text-slate-600">Batal</button></div>
             </form>
@@ -757,7 +758,7 @@
     <footer class="mt-16 bg-[#072b4b] text-blue-100/70 px-4 py-10 text-center border-t border-white/5">
         <div class="max-w-4xl mx-auto">
             <img src="logo-sk-temin.png" alt="" aria-hidden="true" class="w-12 h-12 object-contain mx-auto opacity-90">
-            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.3 PWA</p>
+            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.3.1 PWA</p>
             <p class="mt-1.5 text-xs text-sktYellow font-semibold">&copy; SK Temin | Unit ICT</p>
             <div class="mx-auto my-5 h-px max-w-xs bg-white/10"></div>
             <p class="text-[10px] md:text-[11px] text-blue-100/55">
@@ -824,6 +825,7 @@
         const TEACHER_PORTAL_PIN = '2050';
         const TEACHER_REMEMBER_KEY = 'teminhub_teacher_remembered';
         const TEACHER_SESSION_KEY = 'teminhub_teacher_session';
+        const CONTENT_PUBLISH_KEY_STORAGE = 'teminhub_content_publish_key';
 
         function isTeacherPortalUnlocked() {
             return localStorage.getItem(TEACHER_REMEMBER_KEY) === 'true' ||
@@ -873,8 +875,13 @@
         function lockTeacherPortal() {
             localStorage.removeItem(TEACHER_REMEMBER_KEY);
             sessionStorage.removeItem(TEACHER_SESSION_KEY);
+            localStorage.removeItem(CONTENT_PUBLISH_KEY_STORAGE);
+            const publishKeyInput = document.getElementById('contentPublishKey');
+            const rememberKeyInput = document.getElementById('rememberContentKey');
+            if (publishKeyInput) publishKeyInput.value = '';
+            if (rememberKeyInput) rememberKeyInput.checked = false;
             showPortalView('dashboard');
-            showToast('Portal Guru telah dikunci semula.');
+            showToast('Portal Guru dikunci dan kunci penerbitan dipadam daripada peranti.');
         }
 
         function openEpibgMenu() {
@@ -894,6 +901,9 @@
         function openContentManager() {
             const modal = document.getElementById('contentManagerModal');
             document.getElementById('contentFormStatus').classList.add('hidden');
+            const savedPublishKey = localStorage.getItem(CONTENT_PUBLISH_KEY_STORAGE) || '';
+            document.getElementById('contentPublishKey').value = savedPublishKey;
+            document.getElementById('rememberContentKey').checked = Boolean(savedPublishKey);
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             document.body.style.overflow = 'hidden';
@@ -931,11 +941,13 @@
                 return;
             }
             const button = document.getElementById('contentSubmitButton');
+            const publishKey = document.getElementById('contentPublishKey').value;
+            const rememberPublishKey = document.getElementById('rememberContentKey').checked;
             button.disabled = true;
             button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Menerbitkan...';
             const payload = new URLSearchParams({
                 action: 'publish',
-                key: document.getElementById('contentPublishKey').value,
+                key: publishKey,
                 type: document.getElementById('contentType').value,
                 target: document.getElementById('contentTarget').value,
                 title: document.getElementById('contentTitle').value.trim(),
@@ -950,8 +962,12 @@
                 const response = await fetch(CONTENT_API_URL, { method: 'POST', body: payload });
                 const result = await response.json();
                 if (!result.ok) throw new Error(result.error || 'Penerbitan gagal.');
+                if (rememberPublishKey) localStorage.setItem(CONTENT_PUBLISH_KEY_STORAGE, publishKey);
+                else localStorage.removeItem(CONTENT_PUBLISH_KEY_STORAGE);
                 setContentFormStatus('Kandungan berjaya diterbitkan dan akan dipaparkan pada Dashboard.', false);
                 document.getElementById('contentManagerForm').reset();
+                document.getElementById('contentPublishKey').value = rememberPublishKey ? publishKey : '';
+                document.getElementById('rememberContentKey').checked = rememberPublishKey;
                 toggleContentFields();
                 loadPublishedContent();
             } catch (error) {

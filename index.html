@@ -266,12 +266,17 @@
 
         <section id="portal-murid" class="portal-view hidden space-y-6">
             <div class="flex items-center gap-3 px-1"><span class="w-11 h-11 rounded-2xl bg-blue-100 text-sktBlue flex items-center justify-center"><i class="fas fa-user-graduate"></i></span><div><h2 class="text-xl font-extrabold text-slate-800 font-title">Portal Murid</h2><p class="text-xs text-slate-500">Pembelajaran dan akaun digital murid.</p></div></div>
+
+            <section id="studentAnnouncementSection" class="hidden glass-panel app-card rounded-3xl border border-blue-100 p-5">
+                <div class="flex items-center gap-3"><span class="w-10 h-10 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center"><i class="fas fa-bullhorn"></i></span><div><h3 class="font-extrabold text-slate-800">Pengumuman Murid</h3><p class="text-xs text-slate-500">Maklumat khas untuk murid SK Temin.</p></div></div>
+                <div id="studentAnnouncementList" class="mt-4 space-y-3"></div>
+            </section>
+
             <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                 <button type="button" onclick="openDelimaModule()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-blue-100 text-sktBlue flex items-center justify-center text-lg"><i class="fas fa-id-card"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Semakan DELIMa</span><span class="mt-1 block text-[10px] text-slate-400">Semak ID dan kata laluan</span></button>
-                <a href="https://d2.delima.edu.my/login" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-lg"><i class="fas fa-graduation-cap"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Portal DELIMa</span><span class="mt-1 block text-[10px] text-slate-400">Log masuk DELIMa KPM</span></a>
-                <a href="https://ains.moe.gov.my/login?returnUrl=/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg"><i class="fas fa-book-open"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">AINS NILAM</span><span class="mt-1 block text-[10px] text-slate-400">Rekod bacaan murid</span></a>
-                <a href="https://classroom.google.com/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-green-100 text-green-700 flex items-center justify-center text-lg"><i class="fas fa-chalkboard"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Google Classroom</span><span class="mt-1 block text-[10px] text-slate-400">Kelas dan tugasan</span></a>
-                <a href="https://accounts.google.com/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center text-lg"><i class="fab fa-google"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Google</span><span class="mt-1 block text-[10px] text-slate-400">Akaun Google murid</span></a>
+                <a href="https://d3.delima.edu.my/landing" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-lg"><i class="fas fa-graduation-cap"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Portal DELIMa 3.0</span><span class="mt-1 block text-[10px] text-slate-400">Log masuk DELIMa KPM</span></a>
+                <a href="https://ains-dashboard.moe.gov.my/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg"><i class="fas fa-book-open"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">AINS NILAM</span><span class="mt-1 block text-[10px] font-semibold text-amber-600">Dalam penambahbaikan</span><span class="mt-1 block text-[9px] text-slate-400">Akses mungkin terganggu sementara</span></a>
+                <button type="button" onclick="openClassroomGuide()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="relative mx-auto w-12 h-12 rounded-2xl bg-green-100 text-green-700 flex items-center justify-center text-lg"><i class="fas fa-chalkboard"></i><i class="fas fa-hand-pointer absolute -right-2 -top-2 text-amber-500 animate-bounce"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Google Classroom</span><span class="mt-1 block text-[10px] font-semibold text-green-700">Gunakan akaun DELIMa</span></button>
                 <a href="https://skteminofficial.github.io/teminhub/rekod-komputer/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center text-lg"><i class="fas fa-desktop"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Rekod Komputer</span><span class="mt-1 block text-[10px] text-slate-400">Catat penggunaan komputer</span></a>
                 <button type="button" onclick="openLearningMenu()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-violet-100 text-violet-700 flex items-center justify-center text-lg"><i class="fas fa-book"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Pembelajaran</span><span class="mt-1 block text-[10px] text-slate-400">Pilih subjek Tahun 1–6</span></button>
             </div>
@@ -282,6 +287,12 @@
                 <div class="flex items-center gap-3"><span class="w-11 h-11 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-chalkboard-teacher"></i></span><div><h2 class="text-xl font-extrabold text-slate-800 font-title">Portal Guru</h2><p class="text-xs text-slate-500">Pengurusan dan perkhidmatan rasmi guru.</p></div></div>
                 <button type="button" onclick="lockTeacherPortal()" class="rounded-xl bg-slate-100 hover:bg-slate-200 px-3 py-2 text-[10px] font-bold text-slate-600 transition"><i class="fas fa-lock mr-1"></i>Kunci</button>
             </div>
+
+            <section id="teacherAnnouncementSection" class="hidden glass-panel app-card rounded-3xl border border-emerald-100 p-5">
+                <div class="flex items-center gap-3"><span class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-bullhorn"></i></span><div><h3 class="font-extrabold text-slate-800">Pengumuman Guru</h3><p class="text-xs text-slate-500">Maklumat dan tindakan segera untuk guru.</p></div></div>
+                <div id="teacherAnnouncementList" class="mt-4 space-y-3"></div>
+            </section>
+
             <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                 <button type="button" onclick="openEpibgMenu()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-hand-holding-dollar"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">ePIBG+</span><span class="mt-1 block text-[10px] text-slate-400">Guru Kelas &amp; Bendahari PIBG</span></button>
                 <button type="button" onclick="openContentManager()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center"><i class="fas fa-bullhorn"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Pengumuman &amp; Takwim</span><span class="mt-1 block text-[10px] text-slate-400">Terbit kandungan sekolah</span></button>
@@ -374,21 +385,16 @@
                 </div>
             </section>
 
-            <section aria-label="Akses pantas" class="grid grid-cols-3 gap-2.5 md:gap-3">
-                <a href="https://d2.delima.edu.my/login" target="_blank" rel="noopener noreferrer" class="quick-login-card glass-panel app-card rounded-2xl border border-white/80 p-3 md:p-4 text-center cursor-pointer transition duration-200 hover:-translate-y-1 hover:shadow-xl active:scale-[0.98]">
+            <section aria-label="Akses pantas" class="grid grid-cols-2 gap-2.5 md:gap-3">
+                <a href="https://d3.delima.edu.my/landing" target="_blank" rel="noopener noreferrer" class="quick-login-card glass-panel app-card rounded-2xl border border-white/80 p-3 md:p-4 text-center cursor-pointer transition duration-200 hover:-translate-y-1 hover:shadow-xl active:scale-[0.98]">
                     <span class="quick-login-icon mx-auto flex h-10 w-10 items-center justify-center rounded-2xl bg-amber-100 text-amber-700"><i class="fas fa-graduation-cap"></i></span>
                     <span class="mt-2 block text-[10px] md:text-xs font-bold text-slate-700">DELIMa</span>
                     <span class="mt-1 block text-[9px] md:text-[10px] font-medium text-slate-400">Klik untuk Log Masuk</span>
                 </a>
-                <a href="https://ains.moe.gov.my/login?returnUrl=/" target="_blank" rel="noopener noreferrer" class="quick-login-card glass-panel app-card rounded-2xl border border-white/80 p-3 md:p-4 text-center cursor-pointer transition duration-200 hover:-translate-y-1 hover:shadow-xl active:scale-[0.98]">
+                <a href="https://ains-dashboard.moe.gov.my/" target="_blank" rel="noopener noreferrer" class="quick-login-card glass-panel app-card rounded-2xl border border-white/80 p-3 md:p-4 text-center cursor-pointer transition duration-200 hover:-translate-y-1 hover:shadow-xl active:scale-[0.98]">
                     <span class="quick-login-icon mx-auto flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700"><i class="fas fa-book-open"></i></span>
                     <span class="mt-2 block text-[10px] md:text-xs font-bold text-slate-700">AINS NILAM</span>
-                    <span class="mt-1 block text-[9px] md:text-[10px] font-medium text-slate-400">Klik untuk Log Masuk</span>
-                </a>
-                <a href="https://accounts.google.com/" target="_blank" rel="noopener noreferrer" class="quick-login-card glass-panel app-card rounded-2xl border border-white/80 p-3 md:p-4 text-center cursor-pointer transition duration-200 hover:-translate-y-1 hover:shadow-xl active:scale-[0.98]">
-                    <span class="quick-login-icon mx-auto flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-100 text-blue-700"><i class="fab fa-google"></i></span>
-                    <span class="mt-2 block text-[10px] md:text-xs font-bold text-slate-700">Google</span>
-                    <span class="mt-1 block text-[9px] md:text-[10px] font-medium text-slate-400">Klik untuk Log Masuk</span>
+                    <span class="mt-1 block text-[9px] md:text-[10px] font-medium text-amber-600">Dalam penambahbaikan</span>
                 </a>
             </section>
 
@@ -662,6 +668,33 @@
         </div>
     </main>
 
+    <!-- Panduan akaun Google Classroom -->
+    <div id="classroomGuideModal" class="hidden fixed inset-0 z-[87] bg-slate-950/60 backdrop-blur-sm px-4 py-6 items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="classroomGuideTitle" onclick="if (event.target === this) closeClassroomGuide()">
+        <div class="w-full max-w-md max-h-[92vh] overflow-y-auto rounded-[2rem] bg-white p-5 md:p-7 shadow-2xl border border-white/80">
+            <div class="flex items-start justify-between gap-3">
+                <div class="flex items-center gap-3"><span class="w-12 h-12 rounded-2xl bg-green-100 text-green-700 flex items-center justify-center text-lg"><i class="fas fa-chalkboard"></i></span><div><h2 id="classroomGuideTitle" class="text-lg font-extrabold text-slate-800 font-title">Sebelum Buka Classroom</h2><p class="text-xs text-slate-500">Pastikan akaun DELIMa sedang digunakan.</p></div></div>
+                <button type="button" onclick="closeClassroomGuide()" class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 transition" aria-label="Tutup"><i class="fas fa-times"></i></button>
+            </div>
+
+            <div class="mt-5 rounded-3xl border border-amber-200 bg-amber-50 p-5 text-center">
+                <div class="relative mx-auto w-24 h-20">
+                    <span class="absolute right-1 top-0 w-14 h-14 rounded-full border-4 border-amber-400 bg-white text-slate-500 flex items-center justify-center text-xl shadow-sm"><i class="fas fa-user"></i></span>
+                    <i class="fas fa-hand-point-up absolute right-12 bottom-0 text-4xl text-amber-500 animate-bounce"></i>
+                </div>
+                <p class="mt-2 text-sm font-extrabold text-amber-900">Tekan ikon akaun di penjuru kanan atas</p>
+                <p class="mt-1.5 text-xs leading-relaxed text-amber-800">Kemudian pilih atau tukar kepada <strong>akaun DELIMa</strong> untuk membuka Classroom sekolah.</p>
+            </div>
+
+            <div class="mt-4 rounded-2xl border border-blue-100 bg-blue-50 p-4 text-xs text-slate-700 space-y-2">
+                <p><strong>1.</strong> Buka Google Classroom.</p>
+                <p><strong>2.</strong> Tekan gambar/ikon akaun di bahagian kanan atas.</p>
+                <p><strong>3.</strong> Pilih akaun DELIMa murid, bukan Gmail peribadi.</p>
+            </div>
+
+            <a href="https://classroom.google.com/" target="_blank" rel="noopener noreferrer" onclick="closeClassroomGuide()" class="mt-5 flex w-full items-center justify-center gap-2 rounded-2xl bg-green-600 px-4 py-3.5 text-sm font-extrabold text-white hover:bg-green-700 transition"><i class="fas fa-arrow-up-right-from-square"></i>Buka Google Classroom</a>
+        </div>
+    </div>
+
     <!-- Menu Pembelajaran Murid -->
     <div id="learningMenuModal" class="hidden fixed inset-0 z-[86] bg-slate-950/60 backdrop-blur-sm px-4 py-6 items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="learningMenuTitle" onclick="if (event.target === this) closeLearningMenu()">
         <div class="w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-[2rem] bg-white p-5 md:p-7 shadow-2xl border border-white/80">
@@ -854,7 +887,7 @@
     <footer class="mt-16 bg-[#072b4b] text-blue-100/70 px-4 py-10 text-center border-t border-white/5">
         <div class="max-w-4xl mx-auto">
             <img src="logo-sk-temin.png" alt="" aria-hidden="true" class="w-12 h-12 object-contain mx-auto opacity-90">
-            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.3.9 PWA</p>
+            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.3.11 PWA</p>
             <p class="mt-1.5 text-xs text-sktYellow font-semibold">&copy; SK Temin | Unit ICT</p>
             <div class="mx-auto my-5 h-px max-w-xs bg-white/10"></div>
             <p class="text-[10px] md:text-[11px] text-blue-100/55">
@@ -1242,22 +1275,46 @@
         async function loadPublishedContent() {
             const announcementList = document.getElementById('announcementList');
             const calendarList = document.getElementById('calendarList');
+            const studentSection = document.getElementById('studentAnnouncementSection');
+            const studentList = document.getElementById('studentAnnouncementList');
+            const teacherSection = document.getElementById('teacherAnnouncementSection');
+            const teacherList = document.getElementById('teacherAnnouncementList');
             if (!CONTENT_API_URL) {
                 announcementList.innerHTML = '<p class="rounded-2xl bg-slate-50 p-4 text-xs text-slate-500">Pengumuman belum disambungkan.</p>';
                 calendarList.innerHTML = '<p class="rounded-2xl bg-slate-50 p-4 text-xs text-slate-500">Takwim belum disambungkan.</p>';
+                studentSection?.classList.add('hidden');
+                teacherSection?.classList.add('hidden');
                 return;
             }
             try {
                 const response = await fetch(`${CONTENT_API_URL}?action=list&t=${Date.now()}`, { cache: 'no-store' });
                 const result = await response.json();
                 if (!result.ok) throw new Error(result.error || 'Data gagal dimuatkan.');
-                const announcements = result.items.filter(item => item.type === 'PENGUMUMAN').slice(0, 3);
-                const calendar = result.items.filter(item => item.type === 'TAKWIM').slice(0, 5);
+                const announcements = result.items.filter(item => item.type === 'PENGUMUMAN' && item.target === 'Semua');
+                const studentAnnouncements = result.items.filter(item => item.type === 'PENGUMUMAN' && item.target === 'Murid');
+                const teacherAnnouncements = result.items.filter(item => item.type === 'PENGUMUMAN' && item.target === 'Guru');
+                const calendar = result.items.filter(item => item.type === 'TAKWIM' && item.target === 'Semua');
                 announcementList.replaceChildren(...(announcements.length ? announcements.map(item => createContentCard(item, false)) : [Object.assign(document.createElement('p'), { className: 'rounded-2xl bg-slate-50 p-4 text-xs text-slate-500', textContent: 'Tiada pengumuman baharu buat masa ini.' })]));
                 calendarList.replaceChildren(...(calendar.length ? calendar.map(item => createContentCard(item, true)) : [Object.assign(document.createElement('p'), { className: 'rounded-2xl bg-slate-50 p-4 text-xs text-slate-500', textContent: 'Tiada aktiviti akan datang.' })]));
+                if (studentAnnouncements.length) {
+                    studentList.replaceChildren(...studentAnnouncements.map(item => createContentCard(item, false)));
+                    studentSection.classList.remove('hidden');
+                } else {
+                    studentList.replaceChildren();
+                    studentSection.classList.add('hidden');
+                }
+                if (teacherAnnouncements.length) {
+                    teacherList.replaceChildren(...teacherAnnouncements.map(item => createContentCard(item, false)));
+                    teacherSection.classList.remove('hidden');
+                } else {
+                    teacherList.replaceChildren();
+                    teacherSection.classList.add('hidden');
+                }
             } catch (error) {
                 announcementList.innerHTML = '<p class="rounded-2xl bg-red-50 p-4 text-xs text-red-600">Pengumuman tidak dapat dimuatkan.</p>';
                 calendarList.innerHTML = '<p class="rounded-2xl bg-red-50 p-4 text-xs text-red-600">Takwim tidak dapat dimuatkan.</p>';
+                studentSection?.classList.add('hidden');
+                teacherSection?.classList.add('hidden');
             }
         }
 
@@ -1898,6 +1955,22 @@ window.copyAll = function () {
             if (requestedPortal === 'ibubapa') showPortalView('ibubapa');
         });
 
+        function openClassroomGuide() {
+            const modal = document.getElementById('classroomGuideModal');
+            if (!modal) return;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeClassroomGuide() {
+            const modal = document.getElementById('classroomGuideModal');
+            if (!modal) return;
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
         function openParentIdmeHelp() {
             const modal = document.getElementById('parentIdmeHelpModal');
             if (!modal) return;
@@ -1958,6 +2031,7 @@ window.copyAll = function () {
             if (event.key === 'Escape') {
                 closeLearningMenu();
                 closeParentIdmeHelp();
+                closeClassroomGuide();
             }
         });
     </script>

@@ -314,6 +314,12 @@
 
         <section id="portal-ibubapa" class="portal-view hidden space-y-6">
             <div class="flex items-center gap-3 px-1"><span class="w-11 h-11 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center"><i class="fas fa-people-roof"></i></span><div><h2 class="text-xl font-extrabold text-slate-800 font-title">Portal Ibu Bapa</h2><p class="text-xs text-slate-500">Semakan anak dan maklumat sekolah.</p></div></div>
+
+            <section id="parentAnnouncementSection" class="hidden glass-panel app-card rounded-3xl border border-amber-100 p-5">
+                <div class="flex items-center gap-3"><span class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center"><i class="fas fa-bullhorn"></i></span><div><h3 class="font-extrabold text-slate-800">Pengumuman Ibu Bapa</h3><p class="text-xs text-slate-500">Maklumat khas untuk ibu bapa dan penjaga.</p></div></div>
+                <div id="parentAnnouncementList" class="mt-4 space-y-3"></div>
+            </section>
+
             <div class="glass-panel app-card rounded-[2rem] border border-white/90 p-3 md:p-4">
                 <div class="grid grid-cols-2 gap-3">
                     <div class="service-card rounded-3xl border border-emerald-100 bg-emerald-50/70 p-3 text-center">
@@ -335,8 +341,8 @@
                 <button type="button" onclick="showComingSoon('Kokurikulum Anak')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-medal"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Kokurikulum</span></button>
                 <button type="button" onclick="showComingSoon('Rumah Sukan')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center"><i class="fas fa-flag"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Rumah Sukan</span></button>
                 <button type="button" onclick="openParentIdmeHelp()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-violet-100 text-violet-700 flex items-center justify-center text-lg"><i class="fas fa-key"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">IDMe</span><span class="mt-1 block text-[10px] text-slate-400">Log masuk &amp; bantuan akaun</span></button>
-                <button type="button" onclick="showComingSoon('Maklumat Kelas')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center"><i class="fas fa-school"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Kelas Anak</span></button>
-                <button type="button" onclick="showComingSoon('Guru Kelas')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-orange-100 text-orange-700 flex items-center justify-center"><i class="fas fa-user-tie"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Guru Kelas</span></button>
+                <button type="button" onclick="showComingSoon('Info Kelas')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center"><i class="fas fa-school"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Info Kelas</span><span class="mt-1 block text-[10px] text-slate-400">Guru kelas &amp; jadual waktu</span></button>
+                <button type="button" onclick="showComingSoon('Laporan Prestasi')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-orange-100 text-orange-700 flex items-center justify-center"><i class="fas fa-file-lines"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Laporan Prestasi</span><span class="mt-1 block text-[10px] text-slate-400">PBD, PAJSK &amp; laporan anak</span></button>
             </div>
         </section>
 <!-- TAB 1: SEMAKAN PORTAL -->
@@ -887,7 +893,7 @@
     <footer class="mt-16 bg-[#072b4b] text-blue-100/70 px-4 py-10 text-center border-t border-white/5">
         <div class="max-w-4xl mx-auto">
             <img src="logo-sk-temin.png" alt="" aria-hidden="true" class="w-12 h-12 object-contain mx-auto opacity-90">
-            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.3.11 PWA</p>
+            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.3.13 PWA</p>
             <p class="mt-1.5 text-xs text-sktYellow font-semibold">&copy; SK Temin | Unit ICT</p>
             <div class="mx-auto my-5 h-px max-w-xs bg-white/10"></div>
             <p class="text-[10px] md:text-[11px] text-blue-100/55">
@@ -1279,11 +1285,14 @@
             const studentList = document.getElementById('studentAnnouncementList');
             const teacherSection = document.getElementById('teacherAnnouncementSection');
             const teacherList = document.getElementById('teacherAnnouncementList');
+            const parentSection = document.getElementById('parentAnnouncementSection');
+            const parentList = document.getElementById('parentAnnouncementList');
             if (!CONTENT_API_URL) {
                 announcementList.innerHTML = '<p class="rounded-2xl bg-slate-50 p-4 text-xs text-slate-500">Pengumuman belum disambungkan.</p>';
                 calendarList.innerHTML = '<p class="rounded-2xl bg-slate-50 p-4 text-xs text-slate-500">Takwim belum disambungkan.</p>';
                 studentSection?.classList.add('hidden');
                 teacherSection?.classList.add('hidden');
+                parentSection?.classList.add('hidden');
                 return;
             }
             try {
@@ -1293,6 +1302,7 @@
                 const announcements = result.items.filter(item => item.type === 'PENGUMUMAN' && item.target === 'Semua');
                 const studentAnnouncements = result.items.filter(item => item.type === 'PENGUMUMAN' && item.target === 'Murid');
                 const teacherAnnouncements = result.items.filter(item => item.type === 'PENGUMUMAN' && item.target === 'Guru');
+                const parentAnnouncements = result.items.filter(item => item.type === 'PENGUMUMAN' && item.target === 'Ibu Bapa');
                 const calendar = result.items.filter(item => item.type === 'TAKWIM' && item.target === 'Semua');
                 announcementList.replaceChildren(...(announcements.length ? announcements.map(item => createContentCard(item, false)) : [Object.assign(document.createElement('p'), { className: 'rounded-2xl bg-slate-50 p-4 text-xs text-slate-500', textContent: 'Tiada pengumuman baharu buat masa ini.' })]));
                 calendarList.replaceChildren(...(calendar.length ? calendar.map(item => createContentCard(item, true)) : [Object.assign(document.createElement('p'), { className: 'rounded-2xl bg-slate-50 p-4 text-xs text-slate-500', textContent: 'Tiada aktiviti akan datang.' })]));
@@ -1310,11 +1320,19 @@
                     teacherList.replaceChildren();
                     teacherSection.classList.add('hidden');
                 }
+                if (parentAnnouncements.length) {
+                    parentList.replaceChildren(...parentAnnouncements.map(item => createContentCard(item, false)));
+                    parentSection.classList.remove('hidden');
+                } else {
+                    parentList.replaceChildren();
+                    parentSection.classList.add('hidden');
+                }
             } catch (error) {
                 announcementList.innerHTML = '<p class="rounded-2xl bg-red-50 p-4 text-xs text-red-600">Pengumuman tidak dapat dimuatkan.</p>';
                 calendarList.innerHTML = '<p class="rounded-2xl bg-red-50 p-4 text-xs text-red-600">Takwim tidak dapat dimuatkan.</p>';
                 studentSection?.classList.add('hidden');
                 teacherSection?.classList.add('hidden');
+                parentSection?.classList.add('hidden');
             }
         }
 

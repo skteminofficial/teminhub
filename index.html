@@ -339,7 +339,7 @@
             </div>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                 <button type="button" onclick="openDelimaModule()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-blue-100 text-sktBlue flex items-center justify-center"><i class="fas fa-id-card"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">DELIMa Anak</span></button>
-                <button type="button" onclick="showComingSoon('Kokurikulum Anak')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-medal"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Kokurikulum</span></button>
+                <button type="button" onclick="openKokoSearch()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-medal"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Kokurikulum</span><span class="mt-1 block text-[10px] text-slate-400">Semak unit anak</span></button>
                 <button type="button" onclick="showComingSoon('Rumah Sukan')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center"><i class="fas fa-flag"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Rumah Sukan</span></button>
                 <button type="button" onclick="openParentIdmeHelp()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-violet-100 text-violet-700 flex items-center justify-center text-lg"><i class="fas fa-key"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">IDMe</span><span class="mt-1 block text-[10px] text-slate-400">Log masuk &amp; bantuan akaun</span></button>
                 <button type="button" onclick="showComingSoon('Info Kelas')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center"><i class="fas fa-school"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Info Kelas</span><span class="mt-1 block text-[10px] text-slate-400">Guru kelas &amp; jadual waktu</span></button>
@@ -702,6 +702,34 @@
         </div>
     </div>
 
+    <!-- Semakan Kokurikulum Anak -->
+    <div id="kokoSearchModal" class="hidden fixed inset-0 z-[87] bg-slate-950/60 backdrop-blur-sm px-4 py-6 items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="kokoSearchTitle" onclick="if (event.target === this) closeKokoSearch()">
+        <div class="w-full max-w-lg max-h-[94vh] overflow-y-auto rounded-[2rem] bg-white p-5 md:p-7 shadow-2xl border border-white/80">
+            <div class="flex items-start justify-between gap-3">
+                <div class="flex items-center gap-3"><span class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-medal"></i></span><div><h2 id="kokoSearchTitle" class="text-lg font-extrabold text-slate-800 font-title">Semakan Kokurikulum Anak</h2><p class="text-xs text-slate-500">Cari menggunakan nama murid</p></div></div>
+                <button type="button" onclick="closeKokoSearch()" class="w-10 h-10 flex-shrink-0 rounded-xl bg-slate-100 text-slate-500" aria-label="Tutup"><i class="fas fa-times"></i></button>
+            </div>
+            <form class="mt-5" onsubmit="searchKokoStudent(event)">
+                <label for="kokoSearchInput" class="block mb-2 text-xs font-bold text-slate-600">NAMA ANAK</label>
+                <div class="flex gap-2"><input id="kokoSearchInput" type="search" autocomplete="off" minlength="3" required placeholder="Contoh: Aisyah Humaira" class="min-w-0 flex-1 rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm uppercase focus:border-emerald-500 focus:outline-none"><button type="submit" class="rounded-2xl bg-emerald-600 px-5 text-sm font-extrabold text-white hover:bg-emerald-700"><i class="fas fa-magnifying-glass mr-1.5"></i>Cari</button></div>
+                <p class="mt-2 text-[10px] leading-relaxed text-slate-400">Taip sekurang-kurangnya 3 huruf. Jika ada nama hampir sama, pilih nama dan kelas yang betul.</p>
+            </form>
+            <div id="kokoSearchStatus" class="mt-4 hidden rounded-2xl p-3 text-xs font-semibold"></div>
+            <div id="kokoSearchMatches" class="mt-4 space-y-2"></div>
+            <div id="kokoStudentDetail" class="mt-5 hidden">
+                <div class="rounded-3xl border border-emerald-100 bg-emerald-50/70 p-5">
+                    <div class="flex items-start gap-3"><span class="w-11 h-11 flex-shrink-0 rounded-2xl bg-white text-emerald-700 shadow-sm flex items-center justify-center"><i class="fas fa-user-graduate"></i></span><div><p id="kokoStudentName" class="text-sm font-extrabold leading-snug text-slate-800"></p><p id="kokoStudentClass" class="mt-1 text-xs font-bold text-emerald-700"></p></div></div>
+                    <div class="mt-4 space-y-3">
+                        <div class="rounded-2xl bg-white p-4 shadow-sm"><p class="text-[10px] font-extrabold uppercase tracking-wide text-violet-600">Kelab dan Persatuan</p><p id="kokoStudentClub" class="mt-1 text-sm font-extrabold text-slate-800"></p></div>
+                        <div class="rounded-2xl bg-white p-4 shadow-sm"><p class="text-[10px] font-extrabold uppercase tracking-wide text-blue-600">Unit Beruniform</p><p id="kokoStudentUniform" class="mt-1 text-sm font-extrabold text-slate-800"></p></div>
+                        <div class="rounded-2xl bg-white p-4 shadow-sm"><p class="text-[10px] font-extrabold uppercase tracking-wide text-orange-600">Sukan &amp; Permainan</p><p id="kokoStudentSport" class="mt-1 text-sm font-extrabold text-slate-800"></p></div>
+                    </div>
+                </div>
+                <button type="button" onclick="resetKokoSearch()" class="mt-3 w-full rounded-2xl bg-slate-100 py-3 text-xs font-extrabold text-slate-600 hover:bg-slate-200"><i class="fas fa-rotate-left mr-1.5"></i>Cari Nama Lain</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Menu Pembelajaran Murid -->
     <div id="learningMenuModal" class="hidden fixed inset-0 z-[86] bg-slate-950/60 backdrop-blur-sm px-4 py-6 items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="learningMenuTitle" onclick="if (event.target === this) closeLearningMenu()">
         <div class="w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-[2rem] bg-white p-5 md:p-7 shadow-2xl border border-white/80">
@@ -894,7 +922,7 @@
     <footer class="mt-16 bg-[#072b4b] text-blue-100/70 px-4 py-10 text-center border-t border-white/5">
         <div class="max-w-4xl mx-auto">
             <img src="logo-sk-temin.png" alt="" aria-hidden="true" class="w-12 h-12 object-contain mx-auto opacity-90">
-            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.3.18 PWA</p>
+            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.3.20 PWA</p>
             <p class="mt-1.5 text-xs text-sktYellow font-semibold">&copy; SK Temin | Unit ICT</p>
             <div class="mx-auto mt-5 max-w-sm rounded-2xl border border-white/10 bg-white/5 px-4 py-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[10px] md:text-xs text-blue-100/70">
                 <span class="inline-flex items-center gap-1.5"><i class="fas fa-eye text-sktYellow"></i>Hari Ini: <strong id="visitToday" class="text-white">—</strong></span>
@@ -1413,6 +1441,109 @@
 
         function showComingSoon(moduleName) {
             showToast(`${moduleName} akan ditambah dalam kemas kini seterusnya.`);
+        }
+
+        function normalizeKokoText(value) {
+            return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().replace(/[^A-Z0-9]+/g, ' ').trim();
+        }
+
+        function openKokoSearch() {
+            const modal = document.getElementById('kokoSearchModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            resetKokoSearch();
+            setTimeout(() => document.getElementById('kokoSearchInput')?.focus(), 100);
+        }
+
+        function closeKokoSearch() {
+            const modal = document.getElementById('kokoSearchModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        function resetKokoSearch() {
+            const input = document.getElementById('kokoSearchInput');
+            if (input) input.value = '';
+            document.getElementById('kokoSearchStatus')?.classList.add('hidden');
+            document.getElementById('kokoSearchMatches').replaceChildren();
+            document.getElementById('kokoStudentDetail')?.classList.add('hidden');
+            setTimeout(() => input?.focus(), 50);
+        }
+
+        function setKokoStatus(message, isError = false) {
+            const box = document.getElementById('kokoSearchStatus');
+            box.textContent = message;
+            box.className = `mt-4 rounded-2xl p-3 text-xs font-semibold ${isError ? 'bg-rose-50 text-rose-700' : 'bg-blue-50 text-blue-700'}`;
+        }
+
+        const KOKO_API_URL = 'https://script.google.com/macros/s/AKfycbxKjTyu33Z9tMtZC8--VAwiZtHyvfnYVrOPv9XUN3_VCChvPM3CGD3sQq0X9uWuERwlUg/exec';
+
+        function fetchKokoJsonp(query) {
+            return new Promise((resolve, reject) => {
+                const callbackName = `teminKoko_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+                const script = document.createElement('script');
+                const timeout = setTimeout(() => finish(new Error('Sambungan mengambil masa terlalu lama.')), 20000);
+                function finish(error, data) {
+                    clearTimeout(timeout);
+                    delete window[callbackName];
+                    script.remove();
+                    error ? reject(error) : resolve(data);
+                }
+                window[callbackName] = (data) => finish(null, data);
+                script.onerror = () => finish(new Error('Tidak dapat menyambung ke pangkalan data kokurikulum.'));
+                script.src = `${KOKO_API_URL}?action=search&q=${encodeURIComponent(query)}&callback=${encodeURIComponent(callbackName)}&t=${Date.now()}`;
+                document.head.appendChild(script);
+            });
+        }
+
+        async function searchKokoStudent(event) {
+            event.preventDefault();
+            const rawQuery = document.getElementById('kokoSearchInput').value;
+            const query = normalizeKokoText(rawQuery);
+            const matchesBox = document.getElementById('kokoSearchMatches');
+            matchesBox.replaceChildren();
+            document.getElementById('kokoStudentDetail').classList.add('hidden');
+            if (query.length < 3) return setKokoStatus('Taip sekurang-kurangnya 3 huruf nama anak.', true);
+            setKokoStatus('Sedang mencari rekod kokurikulum...');
+            let response;
+            try {
+                response = await fetchKokoJsonp(rawQuery.trim());
+            } catch (error) {
+                return setKokoStatus(error.message || 'Carian tidak dapat dilakukan. Cuba semula.', true);
+            }
+            if (!response || !response.ok) return setKokoStatus(response?.error || 'Carian tidak dapat dilakukan. Cuba semula.', true);
+            const matches = Array.isArray(response.matches) ? response.matches : [];
+            if (!matches.length) return setKokoStatus('Nama tidak ditemui. Semak ejaan atau cuba sebahagian nama yang lain.', true);
+            if (matches.length === 1) return showKokoStudent(matches[0]);
+            setKokoStatus(`${matches.length} nama ditemui. Pilih nama dan kelas anak yang betul.`);
+            matches.slice(0, 20).forEach((student) => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'w-full rounded-2xl border border-slate-200 bg-slate-50 p-3.5 text-left hover:border-emerald-300 hover:bg-emerald-50 transition';
+                const name = document.createElement('span');
+                name.className = 'block text-xs font-extrabold text-slate-800';
+                name.textContent = student.nama;
+                const className = document.createElement('span');
+                className.className = 'mt-1 block text-[10px] font-bold text-emerald-700';
+                className.textContent = student.kelas;
+                button.append(name, className);
+                button.addEventListener('click', () => showKokoStudent(student));
+                matchesBox.appendChild(button);
+            });
+            if (matches.length > 20) setKokoStatus(`${matches.length} nama ditemui. Taip nama dengan lebih lengkap untuk mengecilkan carian.`);
+        }
+
+        function showKokoStudent(student) {
+            document.getElementById('kokoSearchStatus').classList.add('hidden');
+            document.getElementById('kokoSearchMatches').replaceChildren();
+            document.getElementById('kokoStudentName').textContent = student.nama;
+            document.getElementById('kokoStudentClass').textContent = `Kelas ${student.kelas}`;
+            document.getElementById('kokoStudentClub').textContent = student.kelab;
+            document.getElementById('kokoStudentUniform').textContent = student.uniform;
+            document.getElementById('kokoStudentSport').textContent = student.sukan;
+            document.getElementById('kokoStudentDetail').classList.remove('hidden');
         }
 
         /* Initialization on window load */
@@ -2106,6 +2237,7 @@ window.copyAll = function () {
                 closeLearningMenu();
                 closeParentIdmeHelp();
                 closeClassroomGuide();
+                closeKokoSearch();
             }
         });
     </script>

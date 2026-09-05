@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'temin-hub-v4.3.23';
+const CACHE_VERSION = 'temin-hub-v4.3.24';
 const APP_SHELL = [
   './',
   './index.html',

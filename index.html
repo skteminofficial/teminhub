@@ -296,7 +296,7 @@
             <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                 <button type="button" onclick="openEpibgMenu()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-hand-holding-dollar"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">ePIBG+</span><span class="mt-1 block text-[10px] text-slate-400">Guru Kelas &amp; Bendahari PIBG</span></button>
                 <button type="button" onclick="openContentManager()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center"><i class="fas fa-bullhorn"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Pengumuman &amp; Takwim</span><span class="mt-1 block text-[10px] text-slate-400">Terbit kandungan sekolah</span></button>
-                <button type="button" onclick="openPajsk('submit')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-teal-100 text-teal-700 flex items-center justify-center"><i class="fas fa-file-arrow-up"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Hantar Sijil PAJSK</span><span class="mt-1 block text-[10px] text-slate-400">Rekod sijil murid Tahap 2</span></button>
+                <button type="button" onclick="openPajsk('bulk')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-teal-100 text-teal-700 flex items-center justify-center"><i class="fas fa-users"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Hantar Pukal PAJSK</span><span class="mt-1 block text-[10px] text-slate-400">Rekod ramai peserta serentak</span></button>
                 <button type="button" onclick="openPajsk('dashboard')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center"><i class="fas fa-list-check"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Dashboard PAJSK</span><span class="mt-1 block text-[10px] text-slate-400">Semak dan sahkan sijil</span></button>
                 <a href="https://skteminofficial.github.io/PBD/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center"><i class="fas fa-chart-column"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">E-PBD</span><span class="mt-1 block text-[10px] text-slate-400">Pentaksiran Bilik Darjah</span><span class="mt-3 inline-flex items-center gap-1.5 text-[10px] font-extrabold text-amber-700"><i class="fas fa-arrow-up-right-from-square"></i>Buka Sistem</span></a>
                 <a href="https://skteminofficial.github.io/temin-ai-studio/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-violet-100 text-violet-700 flex items-center justify-center"><i class="fas fa-wand-magic-sparkles"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">TEMIN AI Studio</span><span class="mt-1 block text-[10px] text-slate-400">Alatan AI untuk guru</span><span class="mt-3 inline-flex items-center gap-1.5 text-[10px] font-extrabold text-violet-700"><i class="fas fa-arrow-up-right-from-square"></i>Buka Studio</span></a>
@@ -740,7 +740,7 @@
                 <div class="flex items-center gap-3"><span class="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-100 text-teal-700"><i class="fas fa-medal"></i></span><div><h2 id="pajskTitle" class="font-title text-base font-extrabold text-slate-800">Rekod Sijil PAJSK</h2><p class="text-[10px] text-slate-500">Murid Tahap 2 • Tahun 4–6</p></div></div>
                 <button type="button" onclick="closePajsk()" class="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-500" aria-label="Tutup"><i class="fas fa-times"></i></button>
             </div>
-            <div id="pajskNotReady" class="hidden m-5 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm text-amber-900"><b>Sistem PAJSK belum disambungkan.</b><p class="mt-2 text-xs leading-relaxed">Deploy Apps Script PAJSK dahulu, kemudian tampal URL Web App pada pemboleh ubah <code>https://script.google.com/macros/s/AKfycbxVuNvJtVFh_sjVAPvChtmDjaofM15D063V6iKQQ3aSbwJw9c_ZZ_1OwY7E7c0e7U3D/exec</code> dalam index.html.</p></div>
+            <div id="pajskNotReady" class="hidden m-5 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm text-amber-900"><b>Sistem PAJSK belum disambungkan.</b><p class="mt-2 text-xs leading-relaxed">Deploy Apps Script PAJSK dahulu, kemudian tampal URL Web App pada pemboleh ubah <code>PAJSK_WEB_APP_URL</code> dalam index.html.</p></div>
             <iframe id="pajskFrame" title="Sistem PAJSK SK Temin" class="min-h-0 flex-1 w-full border-0" allow="clipboard-write"></iframe>
         </div>
     </div>
@@ -955,7 +955,7 @@
     <footer class="mt-16 bg-[#072b4b] text-blue-100/70 px-4 py-10 text-center border-t border-white/5">
         <div class="max-w-4xl mx-auto">
             <img src="logo-sk-temin.png" alt="" aria-hidden="true" class="w-12 h-12 object-contain mx-auto opacity-90">
-            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.3.27 PWA</p>
+            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.3.30 PWA</p>
             <p class="mt-1.5 text-xs text-sktYellow font-semibold">&copy; SK Temin | Unit ICT</p>
             <div class="mx-auto mt-5 max-w-sm rounded-2xl border border-white/10 bg-white/5 px-4 py-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[10px] md:text-xs text-blue-100/70">
                 <span class="inline-flex items-center gap-1.5"><i class="fas fa-eye text-sktYellow"></i>Hari Ini: <strong id="visitToday" class="text-white">—</strong></span>
@@ -1002,21 +1002,14 @@
         const portalViews = ['dashboard', 'murid', 'guru', 'ibubapa'];
 
         function openPajsk(view) {
-            const modal = document.getElementById('pajskModal');
-            const frame = document.getElementById('pajskFrame');
-            const notice = document.getElementById('pajskNotReady');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            document.body.style.overflow = 'hidden';
             if (!PAJSK_WEB_APP_URL || PAJSK_WEB_APP_URL.includes('PASTE_')) {
-                notice.classList.remove('hidden');
-                frame.classList.add('hidden');
+                alert('Sistem PAJSK belum disambungkan. Pentadbir perlu memasukkan URL Web App PAJSK terlebih dahulu.');
                 return;
             }
-            notice.classList.add('hidden');
-            frame.classList.remove('hidden');
             const separator = PAJSK_WEB_APP_URL.includes('?') ? '&' : '?';
-            frame.src = PAJSK_WEB_APP_URL + separator + 'view=' + encodeURIComponent(view || 'submit') + '&t=' + Date.now();
+            const targetUrl = PAJSK_WEB_APP_URL + separator + 'view=' + encodeURIComponent(view || 'submit') + '&t=' + Date.now();
+            const opened = window.open(targetUrl, '_blank', 'noopener,noreferrer');
+            if (!opened) window.location.href = targetUrl;
         }
 
         function closePajsk() {

@@ -955,7 +955,7 @@
     <footer class="mt-16 bg-[#072b4b] text-blue-100/70 px-4 py-10 text-center border-t border-white/5">
         <div class="max-w-4xl mx-auto">
             <img src="logo-sk-temin.png" alt="" aria-hidden="true" class="w-12 h-12 object-contain mx-auto opacity-90">
-            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.3.30 PWA</p>
+            <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.3.31 PWA</p>
             <p class="mt-1.5 text-xs text-sktYellow font-semibold">&copy; SK Temin | Unit ICT</p>
             <div class="mx-auto mt-5 max-w-sm rounded-2xl border border-white/10 bg-white/5 px-4 py-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[10px] md:text-xs text-blue-100/70">
                 <span class="inline-flex items-center gap-1.5"><i class="fas fa-eye text-sktYellow"></i>Hari Ini: <strong id="visitToday" class="text-white">—</strong></span>
@@ -995,6 +995,7 @@
 
         // Tampal URL Web App daripada AppsScript-PAJSK selepas deployment.
         const PAJSK_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxVuNvJtVFh_sjVAPvChtmDjaofM15D063V6iKQQ3aSbwJw9c_ZZ_1OwY7E7c0e7U3D/exec";
+        const PAJSK_PARENT_URL = "https://skteminofficial.github.io/pajsk/";
         
         let currentMultipleMatches = [];
         let isAdminAuthenticated = false; // Status log masuk keselamatan admin
@@ -1002,6 +1003,10 @@
         const portalViews = ['dashboard', 'murid', 'guru', 'ibubapa'];
 
         function openPajsk(view) {
+            if (!view || view === 'submit' || view === 'status') {
+                window.open(PAJSK_PARENT_URL, '_blank', 'noopener,noreferrer');
+                return;
+            }
             if (!PAJSK_WEB_APP_URL || PAJSK_WEB_APP_URL.includes('PASTE_')) {
                 alert('Sistem PAJSK belum disambungkan. Pentadbir perlu memasukkan URL Web App PAJSK terlebih dahulu.');
                 return;

@@ -365,10 +365,10 @@
     <div id="classInfoModal" class="hidden fixed inset-0 z-[89] bg-slate-950/60 backdrop-blur-sm px-4 py-6 items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="classInfoTitle" onclick="if(event.target===this) closeClassInfo()">
         <div class="w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-[2rem] bg-white p-5 md:p-7 shadow-2xl border border-white/80">
             <div class="flex items-start justify-between gap-3">
-                <div class="flex items-center gap-3"><span class="w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center"><i class="fas fa-school"></i></span><div><h2 id="classInfoTitle" class="text-lg font-extrabold text-slate-800 font-title">Info Kelas 2026</h2><p class="text-xs text-slate-500">Pilih tahun untuk melihat guru kelas dan jadual waktu.</p></div></div>
+                <div class="flex items-center gap-3"><span class="w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center"><i class="fas fa-school"></i></span><div><h2 id="classInfoTitle" class="text-lg font-extrabold text-slate-800 font-title">Info Kelas 2026</h2><p class="text-xs text-slate-500">Pilih kelas anak untuk melihat guru kelas dan jadual waktu.</p></div></div>
                 <button type="button" onclick="closeClassInfo()" class="w-10 h-10 rounded-xl bg-slate-100 text-slate-500"><i class="fas fa-times"></i></button>
             </div>
-            <div id="classYearButtons" class="mt-5 grid grid-cols-3 md:grid-cols-6 gap-2"></div>
+            <div class="mt-5"><label for="classInfoSelect" class="mb-2 block text-xs font-extrabold text-slate-600">PILIH KELAS ANAK</label><select id="classInfoSelect" onchange="showSelectedClass(this.value)" class="w-full rounded-2xl border-2 border-cyan-100 bg-cyan-50 px-4 py-3.5 text-sm font-extrabold text-slate-800 outline-none focus:border-cyan-500"><option value="">— Pilih kelas —</option></select></div>
             <div id="classInfoResult" class="mt-4"></div>
         </div>
     </div>
@@ -978,7 +978,7 @@
     <footer class="mt-16 bg-[#072b4b] text-blue-100/70 px-4 py-10 text-center border-t border-white/5">
         <div class="max-w-4xl mx-auto">
             <img src="logo-sk-temin.png" alt="" aria-hidden="true" class="w-12 h-12 object-contain mx-auto opacity-90">
-                <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.3.36 PWA</p>
+                <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.3.39 PWA</p>
             <p class="mt-1.5 text-xs text-sktYellow font-semibold">&copy; SK Temin | Unit ICT</p>
             <div class="mx-auto mt-5 max-w-sm rounded-2xl border border-white/10 bg-white/5 px-4 py-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[10px] md:text-xs text-blue-100/70">
                 <span class="inline-flex items-center gap-1.5"><i class="fas fa-eye text-sktYellow"></i>Hari Ini: <strong id="visitToday" class="text-white">—</strong></span>
@@ -1027,7 +1027,7 @@
 
         function openPajsk(view) {
             const teacherView = view === 'bulk' || view === 'dashboard';
-            const targetUrl = teacherView ? PAJSK_PARENT_URL + '?menu=guru&view=' + encodeURIComponent(view) : PAJSK_PARENT_URL;
+            const targetUrl = teacherView ? PAJSK_PARENT_URL + '?menu=guru&view=' + encodeURIComponent(view) + '&v=18' : PAJSK_PARENT_URL + '?v=18';
             const opened = window.open(targetUrl, '_blank', 'noopener,noreferrer');
             if (!opened) window.location.href = targetUrl;
         }
@@ -2460,70 +2460,38 @@ window.copyAll = function () {
             if (requestedPortal === 'ibubapa') showPortalView('ibubapa');
         });
 
-        const CLASS_INFO_2026 = {
-            1: [
-                ['1 SIGMA', 'HASLINA BT. HASSAN'],
-                ['1 GAMMA', 'NUR ILYANI BT. A ROZAK'],
-                ['1 DELTA', 'NOR ASIKIN BT. ABDUL RANI']
-            ],
-            2: [
-                ['2 SIGMA', 'ADLEEN LINA BT. ASMADEE'],
-                ['2 GAMMA', 'SITI RAHAMAH BT. ZAIN'],
-                ['2 LAMBDA', 'ROSYATI BT. SUDIN'],
-                ['2 DELTA', 'MARIAM BT. EMBONG']
-            ],
-            3: [
-                ['3 SIGMA', 'AZLINA BT. ISMON'],
-                ['3 GAMMA', 'NOR RAFIDAH BT. ABDUL RANI'],
-                ['3 LAMBDA', 'SITI FADLINA BT. MOHD SALLEH'],
-                ['3 DELTA', 'AINUR DAMIA BT. MAZLAN']
-            ],
-            4: [
-                ['4 SIGMA', 'NURAZLINDA BT. MOHAMAD RAMLI'],
-                ['4 GAMMA', 'WAMANIUDA BT. SULONG'],
-                ['4 LAMBDA', 'AKIDAH BT. AWANG TEH'],
-                ['4 DELTA', 'AZHANI BT. MOHAMED NASIR']
-            ],
-            5: [
-                ['5 SIGMA', 'RAMLAH BT. JABAL'],
-                ['5 GAMMA', 'FARAH IZYAN BT. JAMALUDDIN'],
-                ['5 DELTA', 'MUNIRAH BT. ZAKARIA']
-            ],
-            6: [
-                ['6 SIGMA', 'ZAINUN BT. IBRAHIM'],
-                ['6 GAMMA', 'NOR ALMIZAN HANIM BT. AB KADIR'],
-                ['6 LAMBDA', 'NORSALMI BT. ABDUL RAHIM'],
-                ['6 DELTA', 'MAIZURA BT. OTHMAN']
-            ]
-        };
-        const CLASS_TIMETABLE_FILES = {
-            tahap1: {
-                view: 'https://drive.google.com/file/d/1I3uP1ph_9WQtK9KuGjVboe-vVKher6QX/view',
-                download: 'https://drive.google.com/uc?export=download&id=1I3uP1ph_9WQtK9KuGjVboe-vVKher6QX',
-                label: 'Tahap 1 • Tahun 1–3'
-            },
-            tahap2: {
-                view: 'https://drive.google.com/file/d/1YoZXDKFsK47nrL4h_b39Wvb0UqZLgOLI/view',
-                download: 'https://drive.google.com/uc?export=download&id=1YoZXDKFsK47nrL4h_b39Wvb0UqZLgOLI',
-                label: 'Tahap 2 • Tahun 4–6'
-            }
-        };
+        const CLASS_INFO_2026 = [
+            {className:'1 DELTA',teacher:'NOR ASIKIN BT. ABDUL RANI',fileId:'1MvLNViCCzNlr0uBCn1TuIOwbmhi9UesM'},
+            {className:'1 GAMMA',teacher:'NUR ILYANI BT. A ROZAK',fileId:'1j0QuEIkQg3ldFtpm-QT1L6EoBTorJYzl'},
+            {className:'1 SIGMA',teacher:'HASLINA BT. HASSAN',fileId:'1ywvTMuSM4AidcmSY-cTS3CFVe7FqvGhQ'},
+            {className:'2 DELTA',teacher:'MARIAM BT. EMBONG',fileId:'1mwJitY0zD28JkY2Nf9HrOrHKHBprdCgZ'},
+            {className:'2 GAMMA',teacher:'SITI RAHAMAH BT. ZAIN',fileId:'1CKBLzbXpOU87C640dZsm-Zb82RpZZ_W7'},
+            {className:'2 LAMBDA',teacher:'ROSYATI BT. SUDIN',fileId:'18DUuaLtUdMKsqj94khYrdPV45VudFluT'},
+            {className:'2 SIGMA',teacher:'ADLEEN LINA BT. ASMADEE',fileId:'1U2RWhUrU_NEg5LbtkkbfI26-DFcfzVXW'},
+            {className:'3 DELTA',teacher:'AINUR DAMIA BT. MAZLAN',fileId:'1mqtqdMRroMbbJHAEso6xhkrdzN7tbGQF'},
+            {className:'3 GAMMA',teacher:'NOR RAFIDAH BT. ABDUL RANI',fileId:'1guFFvx0elSRpnpFvzzFSYyyNYEW6Bd6S'},
+            {className:'3 LAMBDA',teacher:'SITI FADLINA BT. MOHD SALLEH',fileId:'1doLLGVnhLCCT0Redw_HKfIoBj-6umVQz'},
+            {className:'3 SIGMA',teacher:'AZLINA BT. ISMON',fileId:'1_aBjZ_Gr1gX5K2PU2Ur3DrRYKvah2BEv'},
+            {className:'4 DELTA',teacher:'AZHANI BT. MOHAMED NASIR',fileId:'1lfoaIKZPH4d1BbC5_Je3jV9VQ0TAJfwO'},
+            {className:'4 GAMMA',teacher:'WAMANIUDA BT. SULONG',fileId:'10uyC23OeQ__esN1wQZl47eNUcrSUrwM-'},
+            {className:'4 LAMBDA',teacher:'AKIDAH BT. AWANG TEH',fileId:'1z2If0kNjabcIDVH3v1M0ZqtO0nmhs0lY'},
+            {className:'4 SIGMA',teacher:'NURAZLINDA BT. MOHAMAD RAMLI',fileId:'1KfmPjPBtZZKCXw_8sm77-cpvhPWrqszy'},
+            {className:'5 DELTA',teacher:'MUNIRAH BT. ZAKARIA',fileId:'1X3YkLHnFKE7_I_IRs9qKymO7qOeDeDIb'},
+            {className:'5 GAMMA',teacher:'FARAH IZYAN BT. JAMALUDDIN',fileId:'1KQBd2o_f8GLq_7NXGTB_PG-pb7MQCvyv'},
+            {className:'5 SIGMA',teacher:'RAMLAH BT. JABAL',fileId:'1IYbTT135XXO9aUADLYjW0uvMAC3nUbWm'},
+            {className:'6 DELTA',teacher:'MAIZURA BT. OTHMAN',fileId:'1YMIfUiHGPYh1ic5BKxN7FlVKXPTIt1jq'},
+            {className:'6 GAMMA',teacher:'NOR ALMIZAN HANIM BT. AB KADIR',fileId:'1BDK76xGBFtRHej_aT97yHnfPzKU4LC-P'},
+            {className:'6 LAMBDA',teacher:'NORSALMI BT. ABDUL RAHIM',fileId:'1kaTVsQ8b-tG6xQsPJx-AJKdvIxgyoDo5'},
+            {className:'6 SIGMA',teacher:'ZAINUN BT. IBRAHIM',fileId:'12tVS7VT8SaFYSn4aG6Wt4FLZno8hlVo2'}
+        ];
 
         function openClassInfo() {
             const modal = document.getElementById('classInfoModal');
-            const buttons = document.getElementById('classYearButtons');
-            buttons.innerHTML = '';
-            for (let year = 1; year <= 6; year++) {
-                const button = document.createElement('button');
-                button.type = 'button';
-                button.className = 'rounded-2xl border border-cyan-100 bg-cyan-50 px-3 py-3 text-xs font-extrabold text-cyan-800 hover:bg-cyan-100 transition';
-                button.textContent = `Tahun ${year}`;
-                button.onclick = () => showClassYear(year);
-                buttons.appendChild(button);
-            }
+            const select = document.getElementById('classInfoSelect');
+            select.innerHTML = '<option value="">— Pilih kelas —</option>' + CLASS_INFO_2026.map(item => `<option value="${item.className}">${item.className}</option>`).join('');
+            document.getElementById('classInfoResult').innerHTML = '<div class="rounded-2xl border border-cyan-100 bg-cyan-50 p-4 text-center text-xs font-semibold text-cyan-800">Pilih kelas anak daripada senarai di atas.</div>';
             modal.classList.remove('hidden');
             modal.classList.add('flex');
-            showClassYear(1);
         }
 
         function closeClassInfo() {
@@ -2532,27 +2500,22 @@ window.copyAll = function () {
             modal.classList.remove('flex');
         }
 
-        function showClassYear(year) {
-            const rows = CLASS_INFO_2026[year] || [];
-            const file = year <= 3 ? CLASS_TIMETABLE_FILES.tahap1 : CLASS_TIMETABLE_FILES.tahap2;
-            document.querySelectorAll('#classYearButtons button').forEach((button, index) => {
-                button.classList.toggle('bg-cyan-700', index + 1 === year);
-                button.classList.toggle('text-white', index + 1 === year);
-                button.classList.toggle('bg-cyan-50', index + 1 !== year);
-                button.classList.toggle('text-cyan-800', index + 1 !== year);
-            });
+        function showSelectedClass(className) {
+            const item = CLASS_INFO_2026.find(row => row.className === className);
+            if (!item) {
+                document.getElementById('classInfoResult').innerHTML = '<div class="rounded-2xl border border-cyan-100 bg-cyan-50 p-4 text-center text-xs font-semibold text-cyan-800">Pilih kelas anak daripada senarai di atas.</div>';
+                return;
+            }
+            const viewUrl = `https://drive.google.com/file/d/${item.fileId}/view`;
+            const downloadUrl = `https://drive.google.com/uc?export=download&id=${item.fileId}`;
             document.getElementById('classInfoResult').innerHTML = `
                 <div class="rounded-3xl border border-cyan-100 bg-cyan-50/60 p-4">
-                    <div class="flex items-center justify-between gap-3">
-                        <div><h3 class="font-extrabold text-slate-800">Tahun ${year}</h3><p class="text-[10px] text-slate-500">${file.label} • Kuat kuasa 23 Februari 2026</p></div>
-                        <span class="rounded-full bg-white px-3 py-1 text-[10px] font-extrabold text-cyan-700">${rows.length} KELAS</span>
-                    </div>
-                    <div class="mt-3 grid gap-2">${rows.map(row => `<div class="rounded-2xl border border-white bg-white p-3 shadow-sm"><p class="text-xs font-extrabold text-cyan-800">${row[0]}</p><p class="mt-1 text-xs font-bold text-slate-700">Guru Kelas: ${row[1]}</p></div>`).join('')}</div>
+                    <div class="rounded-2xl border border-white bg-white p-4 shadow-sm"><p class="text-sm font-extrabold text-cyan-800">${item.className}</p><p class="mt-2 text-xs font-bold text-slate-700">Guru Kelas: ${item.teacher}</p><p class="mt-1 text-[10px] text-slate-400">Jadual waktu kelas berkuat kuasa bagi sesi 2026.</p></div>
                     <div class="mt-4 grid grid-cols-2 gap-2">
-                        <a href="${file.view}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 rounded-2xl bg-cyan-700 px-3 py-3 text-xs font-extrabold text-white"><i class="fas fa-eye"></i>Lihat Jadual</a>
-                        <a href="${file.download}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 rounded-2xl bg-slate-800 px-3 py-3 text-xs font-extrabold text-white"><i class="fas fa-download"></i>Muat Turun PDF</a>
+                        <a href="${viewUrl}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 rounded-2xl bg-cyan-700 px-3 py-3 text-xs font-extrabold text-white"><i class="fas fa-eye"></i>Lihat Jadual</a>
+                        <a href="${downloadUrl}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 rounded-2xl bg-slate-800 px-3 py-3 text-xs font-extrabold text-white"><i class="fas fa-download"></i>Muat Turun PDF</a>
                     </div>
-                    <p class="mt-3 text-[10px] leading-relaxed text-slate-500">PDF mengandungi semua kelas bagi tahap berkenaan. Pilih halaman kelas anak selepas fail dibuka.</p>
+                    <p class="mt-3 text-[10px] leading-relaxed text-slate-500">Fail ini hanya mengandungi jadual waktu ${item.className}.</p>
                 </div>`;
         }
 

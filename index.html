@@ -85,32 +85,6 @@
             animation: resultReveal .5s cubic-bezier(.22, 1, .36, 1) both;
         }
 
-        .quick-login-card {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .quick-login-card::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.55), transparent 70%);
-            transform: translateX(-120%);
-            transition: transform .55s ease;
-            pointer-events: none;
-        }
-
-        .quick-login-card:hover::after {
-            transform: translateX(120%);
-        }
-
-        .quick-login-card:hover .quick-login-icon {
-            transform: translateY(-2px) scale(1.08);
-        }
-
-        .quick-login-icon {
-            transition: transform .25s ease;
-        }
         @keyframes gentleAttention {
             0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(239,68,68,0); }
             50% { transform: scale(1.012); box-shadow: 0 0 0 5px rgba(239,68,68,.12), 0 10px 25px rgba(239,68,68,.15); }
@@ -156,12 +130,6 @@
         }
     
         .portal-view { animation: appEnter .4s ease-out both; }
-        .portal-menu-card { position: relative; overflow: hidden; isolation: isolate; }
-        .portal-menu-card::before {
-            content: ""; position: absolute; width: 8rem; height: 8rem; right: -3rem; bottom: -4rem;
-            border-radius: 9999px; background: rgba(255,255,255,.14); transition: transform .3s ease; z-index: -1;
-        }
-        .portal-menu-card:hover::before { transform: scale(1.35); }
         #portalNav button { min-height: 72px; font-size: 12px; }
         #portalNav button i { font-size: 20px; margin-bottom: 6px; }
         #nav-dashboard { color: #475569; background: #f1f5f9; }
@@ -176,12 +144,84 @@
             #portalNav button { min-height: 78px; font-size: 13px; }
             #portalNav button i { font-size: 22px; }
         }
-        .service-card { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
-        .service-card:hover { transform: translateY(-3px); box-shadow: 0 16px 35px rgba(15,76,129,.11); border-color: rgba(15,76,129,.22); }
         .subject-card { transition: transform .2s ease, box-shadow .2s ease; }
         .subject-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(15,76,129,.10); }
         .subject-card:active { transform: scale(.98); }
 
+        /* UI/UX Premium: Kad Timbul 3D & Lencana Ikon Glossy */
+        .hub-tile {
+            position: relative;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            border: 1px solid rgba(226, 232, 240, 0.95);
+            border-bottom: 4px solid #cbd5e1;
+            box-shadow:
+                0 12px 26px -6px rgba(15, 76, 129, 0.12),
+                0 4px 10px -2px rgba(15, 23, 42, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.95);
+            transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.24s ease, border-color 0.24s ease;
+        }
+        .hub-tile:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 189, 248, 0.55);
+            box-shadow:
+                0 22px 38px -10px rgba(15, 76, 129, 0.20),
+                0 8px 16px -4px rgba(15, 23, 42, 0.07),
+                inset 0 1px 0 #ffffff;
+        }
+        .hub-tile:active {
+            transform: translateY(1px) scale(0.985);
+            border-bottom-width: 2px;
+            box-shadow: 0 6px 14px -4px rgba(15, 76, 129, 0.14);
+        }
+        .hub-tile:hover .icon-3d {
+            transform: translateY(-3px) scale(1.07) rotate(-2deg);
+        }
+
+        .icon-3d {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1.15rem;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            box-shadow:
+                0 10px 20px -5px var(--icon-shadow, rgba(15, 76, 129, 0.38)),
+                inset 0 2px 3px rgba(255, 255, 255, 0.55),
+                inset 0 -3px 5px rgba(0, 0, 0, 0.16);
+            transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.26s ease;
+        }
+        .icon-3d::before {
+            content: "";
+            position: absolute;
+            top: 3px;
+            left: 5px;
+            right: 5px;
+            height: 44%;
+            border-radius: 0.85rem 0.85rem 50% 50%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+        }
+
+        /* Variasi Warna Ikon 3D */
+        .icon-3d-blue    { background: linear-gradient(145deg, #3b82f6 0%, #1d4ed8 100%); --icon-shadow: rgba(29, 78, 216, 0.42); }
+        .icon-3d-sky     { background: linear-gradient(145deg, #38bdf8 0%, #0284c7 100%); --icon-shadow: rgba(2, 132, 199, 0.42); }
+        .icon-3d-cyan    { background: linear-gradient(145deg, #22d3ee 0%, #0891b2 100%); --icon-shadow: rgba(8, 145, 178, 0.42); }
+        .icon-3d-teal    { background: linear-gradient(145deg, #2dd4bf 0%, #0d9488 100%); --icon-shadow: rgba(13, 148, 136, 0.42); }
+        .icon-3d-emerald { background: linear-gradient(145deg, #34d399 0%, #059669 100%); --icon-shadow: rgba(5, 150, 105, 0.42); }
+        .icon-3d-green   { background: linear-gradient(145deg, #4ade80 0%, #16a34a 100%); --icon-shadow: rgba(22, 163, 74, 0.42); }
+        .icon-3d-amber   { background: linear-gradient(145deg, #fbbf24 0%, #d97706 100%); --icon-shadow: rgba(217, 119, 6, 0.42); }
+        .icon-3d-orange  { background: linear-gradient(145deg, #fb923c 0%, #ea580c 100%); --icon-shadow: rgba(234, 88, 12, 0.42); }
+        .icon-3d-rose    { background: linear-gradient(145deg, #fb7185 0%, #e11d48 100%); --icon-shadow: rgba(225, 29, 72, 0.42); }
+        .icon-3d-fuchsia { background: linear-gradient(145deg, #e879f9 0%, #c026d3 100%); --icon-shadow: rgba(192, 38, 211, 0.42); }
+        .icon-3d-violet  { background: linear-gradient(145deg, #a78bfa 0%, #7c3aed 100%); --icon-shadow: rgba(124, 58, 237, 0.42); }
+        .icon-3d-indigo  { background: linear-gradient(145deg, #818cf8 0%, #4f46e5 100%); --icon-shadow: rgba(79, 70, 229, 0.42); }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        .header-logo-float { animation: floatSlow 4.5s ease-in-out infinite; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between text-slate-800">
@@ -200,45 +240,57 @@
         </div>
     </div>
 
-    <header class="relative overflow-hidden bg-gradient-to-br from-[#082f55] via-sktBlue to-[#1769a5] text-white pb-24 pt-6 px-4 rounded-b-[2.25rem] md:rounded-b-[3.5rem] shadow-2xl shadow-blue-950/20">
-        <div class="absolute -top-24 -right-16 w-72 h-72 rounded-full bg-white/10 blur-2xl pointer-events-none"></div>
-        <div class="absolute -bottom-24 -left-20 w-80 h-80 rounded-full bg-sktYellow/15 blur-2xl pointer-events-none"></div>
-        <div class="absolute inset-0 opacity-[0.07] pointer-events-none" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 22px 22px;"></div>
+    <header class="relative overflow-hidden bg-gradient-to-br from-[#062340] via-[#0c3f6e] to-[#1363a3] text-white pb-24 pt-5 px-4 rounded-b-[2.5rem] md:rounded-b-[3.75rem] shadow-2xl shadow-blue-950/25 border-b border-white/10">
+        <!-- Cahaya Ambient & Grid Halus -->
+        <div class="absolute -top-28 -right-20 w-80 h-80 rounded-full bg-sky-400/20 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-28 -left-24 w-96 h-96 rounded-full bg-sktYellow/20 blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[32rem] h-52 rounded-full bg-blue-400/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute inset-0 opacity-[0.06] pointer-events-none" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 20px 20px;"></div>
 
         <div class="max-w-4xl mx-auto relative z-10">
-            <div class="flex items-center justify-between mb-7">
-                <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] md:text-xs font-semibold tracking-wide backdrop-blur-md">
+            <!-- Bar Atas Status & Tarikh -->
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-6">
+                <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[10px] md:text-xs font-bold tracking-wider backdrop-blur-md shadow-sm">
                     <span class="inline-flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    PORTAL RASMI SK TEMIN
+                    <span>PORTAL RASMI SK TEMIN</span>
                 </div>
-                <div class="text-[10px] md:text-xs text-blue-100/80 font-medium">
-                    Mudah • Pantas • Selamat
+                <div id="headerLiveDate" class="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-slate-950/25 px-3.5 py-1.5 text-[10px] md:text-xs text-blue-100 font-semibold backdrop-blur-md">
+                    <i class="far fa-calendar-check text-sktYellow"></i>
+                    <span>Mudah • Pantas • Selamat</span>
                 </div>
             </div>
 
+            <!-- Identiti Utama Sekolah -->
             <div class="text-center flex flex-col items-center app-enter">
-                <button type="button" aria-label="Logo SK Temin" class="tap-highlight-none rounded-full focus:outline-none focus-visible:ring-4 focus-visible:ring-white/30">
-                    <img
-                        id="schoolLogo"
-                        src="logo-sk-temin.png"
-                        alt="Logo SK Temin"
-                        class="w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-2xl cursor-pointer select-none transition-transform duration-300 active:scale-95"
-                        width="128"
-                        height="128"
-                        draggable="false">
-                </button>
+                <div class="relative group">
+                    <div class="absolute -inset-2 rounded-[2.25rem] bg-gradient-to-tr from-sktYellow/40 via-sky-300/30 to-white/40 blur-lg opacity-80 group-hover:opacity-100 transition duration-500 pointer-events-none"></div>
+                    <button type="button" aria-label="Logo SK Temin" class="header-logo-float relative tap-highlight-none rounded-[2rem] bg-white/15 p-2.5 md:p-3 border border-white/30 backdrop-blur-md shadow-[0_18px_38px_rgba(4,24,48,0.45)] focus:outline-none focus-visible:ring-4 focus-visible:ring-white/40">
+                        <img
+                            id="schoolLogo"
+                            src="logo-sk-temin.png"
+                            alt="Logo SK Temin"
+                            class="w-20 h-20 md:w-28 md:h-28 object-contain drop-shadow-xl cursor-pointer select-none transition-transform duration-300 active:scale-95"
+                            width="128"
+                            height="128"
+                            draggable="false">
+                    </button>
+                </div>
 
-                <p class="mt-4 text-sktYellow font-bold tracking-[0.22em] text-[10px] md:text-xs uppercase font-title">
-                    Sekolah Kebangsaan Temin
-                </p>
-                <h1 class="mt-2 text-3xl md:text-5xl font-extrabold tracking-tight font-title leading-none">
+                <div class="mt-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sktYellow/15 border border-sktYellow/30">
+                    <i class="fas fa-award text-sktYellow text-[11px]"></i>
+                    <p class="text-sktYellow font-extrabold tracking-[0.2em] text-[10px] md:text-xs uppercase font-title">
+                        Sekolah Kebangsaan Temin
+                    </p>
+                </div>
+
+                <h1 class="mt-2.5 text-3xl md:text-5xl font-extrabold tracking-tight font-title leading-none bg-gradient-to-b from-white via-white to-blue-100 bg-clip-text text-transparent drop-shadow-sm">
                     TEMIN HUB
                 </h1>
-                <p class="mt-3 text-blue-50 text-sm md:text-base font-medium">
-                    Portal Digital SK Temin
+                <p class="mt-2.5 text-blue-50 text-sm md:text-base font-semibold">
+                    Ekosistem Digital Bersepadu SK Temin
                 </p>
-                <p class="mt-2 text-blue-100/75 text-xs md:text-sm max-w-lg px-5 leading-relaxed">
-                    Pusat sehenti perkhidmatan digital untuk murid, guru dan ibu bapa.
+                <p class="mt-1.5 text-blue-100/80 text-xs md:text-sm max-w-md px-4 leading-relaxed">
+                    Akses pantas perkhidmatan pembelajaran, pengurusan guru dan semakan ibu bapa dalam satu aplikasi.
                 </p>
             </div>
         </div>
@@ -277,25 +329,56 @@
         </section>
 
         <section id="portal-murid" class="portal-view hidden space-y-6">
-            <div class="flex items-center gap-3 px-1"><span class="w-11 h-11 rounded-2xl bg-blue-100 text-sktBlue flex items-center justify-center"><i class="fas fa-user-graduate"></i></span><div><h2 class="text-xl font-extrabold text-slate-800 font-title">Portal Murid</h2><p class="text-xs text-slate-500">Pembelajaran dan akaun digital murid.</p></div></div>
+            <div class="flex items-center gap-3 px-1">
+                <span class="icon-3d icon-3d-blue w-12 h-12 text-lg shrink-0"><i class="fas fa-user-graduate"></i></span>
+                <div>
+                    <h2 class="text-xl font-extrabold text-slate-800 font-title">Portal Murid</h2>
+                    <p class="text-xs text-slate-500">Pembelajaran dan akaun digital murid.</p>
+                </div>
+            </div>
 
             <section id="studentAnnouncementSection" class="hidden glass-panel app-card rounded-3xl border border-blue-100 p-5">
                 <div class="flex items-center gap-3"><span class="w-10 h-10 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center"><i class="fas fa-bullhorn"></i></span><div><h3 class="font-extrabold text-slate-800">Pengumuman Murid</h3><p class="text-xs text-slate-500">Maklumat khas untuk murid SK Temin.</p></div></div>
                 <div id="studentAnnouncementList" class="mt-4 space-y-3"></div>
             </section>
 
-            <div class="grid grid-cols-2 gap-3">
-                <button type="button" onclick="openDelimaModule()" class="service-card rounded-3xl border-2 border-rose-300 bg-gradient-to-br from-rose-50 to-white p-5 text-center shadow-lg shadow-rose-100"><span class="mx-auto w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center text-lg"><i class="fas fa-id-card"></i></span><span class="mt-3 block text-sm font-extrabold text-rose-700">SEMAKAN ID DELIMa</span><span class="mt-1 block text-[10px] font-bold text-slate-600">Cari menggunakan nama murid</span></button>
-                <button type="button" onclick="openClassroomGuide()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="relative mx-auto w-12 h-12 rounded-2xl bg-green-100 text-green-700 flex items-center justify-center text-lg"><i class="fas fa-chalkboard"></i><i class="fas fa-hand-pointer absolute -right-2 -top-2 text-amber-500 animate-bounce"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Google Classroom</span><span class="mt-1 block text-[10px] font-semibold text-green-700">Gunakan akaun DELIMa</span></button>
-                <a href="https://skteminofficial.github.io/teminhub/rekod-komputer/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center text-lg"><i class="fas fa-desktop"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Rekod Komputer</span><span class="mt-1 block text-[10px] text-slate-400">Catat penggunaan komputer</span></a>
-                <button type="button" onclick="openLearningMenu()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-violet-100 text-violet-700 flex items-center justify-center text-lg"><i class="fas fa-book"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Pembelajaran</span><span class="mt-1 block text-[10px] text-slate-400">Pilih subjek Tahun 1–6</span></button>
+            <div class="grid grid-cols-2 gap-3.5 md:gap-4">
+                <button type="button" onclick="openDelimaModule()" class="hub-tile rounded-3xl border-2 border-rose-200 bg-gradient-to-b from-rose-50/90 to-white p-5 text-center">
+                    <span class="icon-3d icon-3d-rose mx-auto w-14 h-14 text-xl"><i class="fas fa-id-card"></i></span>
+                    <span class="mt-3.5 block text-sm font-extrabold text-rose-700">SEMAKAN ID DELIMa</span>
+                    <span class="mt-1 block text-[11px] font-semibold text-slate-500">Cari menggunakan nama murid</span>
+                </button>
+                <button type="button" onclick="openClassroomGuide()" class="hub-tile rounded-3xl p-5 text-center">
+                    <span class="relative mx-auto block w-14 h-14">
+                        <span class="icon-3d icon-3d-green w-14 h-14 text-xl"><i class="fas fa-chalkboard"></i></span>
+                        <span class="absolute -right-1.5 -top-1.5 w-6 h-6 rounded-full bg-amber-400 text-slate-900 shadow-md flex items-center justify-center text-[11px] animate-bounce"><i class="fas fa-hand-pointer"></i></span>
+                    </span>
+                    <span class="mt-3.5 block text-sm font-extrabold text-slate-800">Google Classroom</span>
+                    <span class="mt-1 block text-[11px] font-semibold text-emerald-600">Gunakan akaun DELIMa</span>
+                </button>
+                <a href="https://skteminofficial.github.io/teminhub/rekod-komputer/" target="_blank" rel="noopener noreferrer" class="hub-tile rounded-3xl p-5 text-center">
+                    <span class="icon-3d icon-3d-cyan mx-auto w-14 h-14 text-xl"><i class="fas fa-desktop"></i></span>
+                    <span class="mt-3.5 block text-sm font-extrabold text-slate-800">Rekod Komputer</span>
+                    <span class="mt-1 block text-[11px] text-slate-500">Catat penggunaan komputer</span>
+                </a>
+                <button type="button" onclick="openLearningMenu()" class="hub-tile rounded-3xl p-5 text-center">
+                    <span class="icon-3d icon-3d-violet mx-auto w-14 h-14 text-xl"><i class="fas fa-book-open-reader"></i></span>
+                    <span class="mt-3.5 block text-sm font-extrabold text-slate-800">Pembelajaran</span>
+                    <span class="mt-1 block text-[11px] text-slate-500">Pilih subjek Tahun 1–6</span>
+                </button>
             </div>
         </section>
 
         <section id="portal-guru" class="portal-view hidden space-y-6">
             <div class="flex items-center justify-between gap-3 px-1">
-                <div class="flex items-center gap-3"><span class="w-11 h-11 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-chalkboard-teacher"></i></span><div><h2 class="text-xl font-extrabold text-slate-800 font-title">Portal Guru</h2><p class="text-xs text-slate-500">Pengurusan dan perkhidmatan rasmi guru.</p></div></div>
-                <button type="button" onclick="lockTeacherPortal()" class="rounded-xl bg-slate-100 hover:bg-slate-200 px-3 py-2 text-[10px] font-bold text-slate-600 transition"><i class="fas fa-lock mr-1"></i>Kunci</button>
+                <div class="flex items-center gap-3">
+                    <span class="icon-3d icon-3d-emerald w-12 h-12 text-lg shrink-0"><i class="fas fa-chalkboard-teacher"></i></span>
+                    <div>
+                        <h2 class="text-xl font-extrabold text-slate-800 font-title">Portal Guru</h2>
+                        <p class="text-xs text-slate-500">Pengurusan dan perkhidmatan rasmi guru.</p>
+                    </div>
+                </div>
+                <button type="button" onclick="lockTeacherPortal()" class="rounded-2xl bg-white hover:bg-slate-100 border border-slate-200 shadow-sm px-3.5 py-2.5 text-xs font-bold text-slate-600 transition active:scale-95"><i class="fas fa-lock mr-1.5 text-slate-400"></i>Kunci</button>
             </div>
 
             <section id="teacherAnnouncementSection" class="hidden glass-panel app-card rounded-3xl border border-emerald-100 p-5">
@@ -303,61 +386,140 @@
                 <div id="teacherAnnouncementList" class="mt-4 space-y-3"></div>
             </section>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                <button type="button" onclick="openEpibgMenu()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-hand-holding-dollar"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">ePIBG+</span><span class="mt-1 block text-[10px] text-slate-400">Guru Kelas &amp; Bendahari PIBG</span></button>
-                <button type="button" onclick="openContentManager()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center"><i class="fas fa-bullhorn"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Pengumuman &amp; Takwim</span><span class="mt-1 block text-[10px] text-slate-400">Terbit kandungan sekolah</span></button>
-                <button type="button" onclick="openPajsk('dashboard')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center"><i class="fas fa-medal"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">PAJSK</span><span class="mt-1 block text-[10px] text-slate-400">Hantar pukal, semak &amp; sahkan</span></button>
-                <a href="https://skteminofficial.github.io/sk-stemin/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-24 h-12 rounded-xl overflow-hidden bg-white/80 ring-1 ring-slate-200 flex items-center justify-center"><img src="assets/logo-skas.png" alt="Logo SK@S" class="w-full h-full object-contain" loading="lazy"></span><span class="mt-3 block text-sm font-bold text-slate-800">SK@S</span><span class="mt-1 block text-[10px] text-slate-400">SKPM KUALITI @SEKOLAH</span><span class="mt-3 inline-flex items-center gap-1.5 text-[10px] font-extrabold text-sky-700"><i class="fas fa-arrow-up-right-from-square"></i>Buka Sistem</span></a>
-                <a href="https://script.google.com/a/macros/moe-dl.edu.my/s/AKfycbyP8Y6EVMbK_YRydgVwiUqvNY_AuoqMPkDa11BHTDREQ6wPht8au9EKORQvb2aApyFrlg/exec" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-fuchsia-100 text-fuchsia-700 flex items-center justify-center"><i class="fas fa-graduation-cap"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">PENGISIAN DATA HAC 2026</span><span class="mt-1 block text-[10px] text-slate-400">Pengisian maklumat HAC sekolah</span><span class="mt-3 inline-flex items-center gap-1.5 text-[10px] font-extrabold text-fuchsia-700"><i class="fas fa-arrow-up-right-from-square"></i>Buka Sistem</span></a>
-                <a href="https://skteminofficial.github.io/PBD/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center"><i class="fas fa-chart-column"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">E-PBD</span><span class="mt-1 block text-[10px] text-slate-400">Pentaksiran Bilik Darjah</span><span class="mt-3 inline-flex items-center gap-1.5 text-[10px] font-extrabold text-amber-700"><i class="fas fa-arrow-up-right-from-square"></i>Buka Sistem</span></a>
-                <a href="https://skteminofficial.github.io/temin-ai-studio/" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-violet-100 text-violet-700 flex items-center justify-center"><i class="fas fa-wand-magic-sparkles"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">TEMIN AI Studio</span><span class="mt-1 block text-[10px] text-slate-400">Alatan AI untuk guru</span><span class="mt-3 inline-flex items-center gap-1.5 text-[10px] font-extrabold text-violet-700"><i class="fas fa-arrow-up-right-from-square"></i>Buka Studio</span></a>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3.5 md:gap-4">
+                <button type="button" onclick="openEpibgMenu()" class="hub-tile rounded-3xl p-5 text-center">
+                    <span class="icon-3d icon-3d-emerald mx-auto w-14 h-14 text-xl"><i class="fas fa-hand-holding-dollar"></i></span>
+                    <span class="mt-3.5 block text-sm font-extrabold text-slate-800">ePIBG+</span>
+                    <span class="mt-1 block text-[11px] text-slate-500">Guru Kelas &amp; Bendahari PIBG</span>
+                </button>
+                <button type="button" onclick="openContentManager()" class="hub-tile rounded-3xl p-5 text-center">
+                    <span class="icon-3d icon-3d-rose mx-auto w-14 h-14 text-xl"><i class="fas fa-bullhorn"></i></span>
+                    <span class="mt-3.5 block text-sm font-extrabold text-slate-800">Pengumuman &amp; Takwim</span>
+                    <span class="mt-1 block text-[11px] text-slate-500">Terbit kandungan sekolah</span>
+                </button>
+                <button type="button" onclick="openPajsk('dashboard')" class="hub-tile rounded-3xl p-5 text-center">
+                    <span class="icon-3d icon-3d-indigo mx-auto w-14 h-14 text-xl"><i class="fas fa-medal"></i></span>
+                    <span class="mt-3.5 block text-sm font-extrabold text-slate-800">PAJSK</span>
+                    <span class="mt-1 block text-[11px] text-slate-500">Hantar pukal, semak &amp; sahkan</span>
+                </button>
+                <a href="https://skteminofficial.github.io/sk-stemin/" target="_blank" rel="noopener noreferrer" class="hub-tile rounded-3xl p-5 text-center">
+                    <span class="icon-3d icon-3d-sky mx-auto w-14 h-14 text-xl"><i class="fas fa-award"></i></span>
+                    <span class="mt-3.5 block text-sm font-extrabold text-slate-800">SK@S</span>
+                    <span class="mt-1 block text-[11px] text-slate-500">SKPM Kualiti @Sekolah</span>
+                </a>
+                <a href="https://script.google.com/a/macros/moe-dl.edu.my/s/AKfycbyP8Y6EVMbK_YRydgVwiUqvNY_AuoqMPkDa11BHTDREQ6wPht8au9EKORQvb2aApyFrlg/exec" target="_blank" rel="noopener noreferrer" class="hub-tile rounded-3xl p-5 text-center">
+                    <span class="icon-3d icon-3d-fuchsia mx-auto w-14 h-14 text-xl"><i class="fas fa-graduation-cap"></i></span>
+                    <span class="mt-3.5 block text-sm font-extrabold text-slate-800">DATA HAC 2026</span>
+                    <span class="mt-1 block text-[11px] text-slate-500">Maklumat HAC sekolah</span>
+                </a>
+                <a href="https://skteminofficial.github.io/PBD/" target="_blank" rel="noopener noreferrer" class="hub-tile rounded-3xl p-5 text-center">
+                    <span class="icon-3d icon-3d-amber mx-auto w-14 h-14 text-xl"><i class="fas fa-chart-column"></i></span>
+                    <span class="mt-3.5 block text-sm font-extrabold text-slate-800">E-PBD</span>
+                    <span class="mt-1 block text-[11px] text-slate-500">Pentaksiran Bilik Darjah</span>
+                </a>
+                <a href="https://skteminofficial.github.io/temin-ai-studio/" target="_blank" rel="noopener noreferrer" class="hub-tile rounded-3xl p-5 text-center">
+                    <span class="icon-3d icon-3d-violet mx-auto w-14 h-14 text-xl"><i class="fas fa-wand-magic-sparkles"></i></span>
+                    <span class="mt-3.5 block text-sm font-extrabold text-slate-800">TEMIN AI Studio</span>
+                    <span class="mt-1 block text-[11px] text-slate-500">Alatan AI untuk guru</span>
+                </a>
             </div>
 
             <div class="pt-2">
-                <div class="flex items-center gap-3 px-1 mb-3">
-                    <span class="w-10 h-10 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center"><i class="fas fa-building-circle-check"></i></span>
-                    <div><h3 class="text-base font-extrabold text-slate-800 font-title">Fasiliti &amp; Aset</h3><p class="text-[10px] text-slate-500">Tempahan kemudahan dan pinjaman peralatan sekolah.</p></div>
+                <div class="flex items-center gap-3 px-1 mb-3.5">
+                    <span class="icon-3d icon-3d-cyan w-11 h-11 text-base shrink-0"><i class="fas fa-building-circle-check"></i></span>
+                    <div><h3 class="text-base font-extrabold text-slate-800 font-title">Fasiliti &amp; Aset</h3><p class="text-[11px] text-slate-500">Tempahan kemudahan dan pinjaman peralatan sekolah.</p></div>
                 </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <a href="https://www.appsheet.com/start/d2caf4cd-c3c3-4f03-b52c-0554147622a7?platform=mobile#appName=TEMPAHANBILIKKHASSKTEMIN-436402353&amp;vss=H4sIAAAAAAAAA63PTQ6CMBAF4KuQWfcE3aEhgSDEBOLGuqh0SBqhJbSopOndLf7EjSt1OW8yX944OEu8VJY3J6B7955ynIGCY1DPAzKgDNZa2VF3DAiDkvePsE6KbZzGZbTKNlke5WlcMfDgD-RFWTRA3dcS_VsnAlKgsrKVOC7sggTuSYT1AoTgwzl4Av1k-bHD-0fh3PuQtbqZDIpdKPhbMZOp5DpwJQotgt7yzqC_AQKhS8KcAQAA&amp;view=TEMPAHAN%20BILIK%20KHAS" target="_blank" rel="noopener noreferrer" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center"><i class="fas fa-door-open"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Tempahan Bilik Khas</span><span class="mt-1 block text-[10px] text-slate-400">Semak dan tempah bilik sekolah</span><span class="mt-3 inline-flex items-center gap-1.5 text-[10px] font-extrabold text-blue-700"><i class="fas fa-arrow-up-right-from-square"></i>Buka AppSheet</span></a>
-                    <a href="guru/pinjaman-laptop/" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center"><i class="fas fa-laptop"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Pinjaman Laptop Guru</span><span class="mt-1 block text-[10px] text-slate-400">Pinjam beberapa laptop untuk PdPc</span><span class="mt-3 inline-flex items-center gap-1.5 text-[10px] font-extrabold text-cyan-700"><i class="fas fa-arrow-right"></i>Buka Borang</span></a>
+                <div class="grid grid-cols-2 gap-3.5 md:gap-4">
+                    <a href="https://www.appsheet.com/start/d2caf4cd-c3c3-4f03-b52c-0554147622a7?platform=mobile#appName=TEMPAHANBILIKKHASSKTEMIN-436402353&amp;vss=H4sIAAAAAAAAA63PTQ6CMBAF4KuQWfcE3aEhgSDEBOLGuqh0SBqhJbSopOndLf7EjSt1OW8yX944OEu8VJY3J6B7955ynIGCY1DPAzKgDNZa2VF3DAiDkvePsE6KbZzGZbTKNlke5WlcMfDgD-RFWTRA3dcS_VsnAlKgsrKVOC7sggTuSYT1AoTgwzl4Av1k-bHD-0fh3PuQtbqZDIpdKPhbMZOp5DpwJQotgt7yzqC_AQKhS8KcAQAA&amp;view=TEMPAHAN%20BILIK%20KHAS" target="_blank" rel="noopener noreferrer" class="hub-tile rounded-3xl p-5 text-center">
+                        <span class="icon-3d icon-3d-blue mx-auto w-14 h-14 text-xl"><i class="fas fa-door-open"></i></span>
+                        <span class="mt-3.5 block text-sm font-extrabold text-slate-800">Tempahan Bilik Khas</span>
+                        <span class="mt-1 block text-[11px] text-slate-500">Semak &amp; tempah bilik</span>
+                    </a>
+                    <a href="guru/pinjaman-laptop/" class="hub-tile rounded-3xl p-5 text-center">
+                        <span class="icon-3d icon-3d-teal mx-auto w-14 h-14 text-xl"><i class="fas fa-laptop"></i></span>
+                        <span class="mt-3.5 block text-sm font-extrabold text-slate-800">Pinjaman Laptop Guru</span>
+                        <span class="mt-1 block text-[11px] text-slate-500">Pinjaman peralatan PdPc</span>
+                    </a>
                 </div>
             </div>
         </section>
 
         <section id="portal-ibubapa" class="portal-view hidden space-y-6">
-            <div class="flex items-center gap-3 px-1"><span class="w-11 h-11 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center"><i class="fas fa-people-roof"></i></span><div><h2 class="text-xl font-extrabold text-slate-800 font-title">Portal Ibu Bapa</h2><p class="text-xs text-slate-500">Semakan anak dan maklumat sekolah.</p></div></div>
+            <div class="flex items-center gap-3 px-1">
+                <span class="icon-3d icon-3d-amber w-12 h-12 text-lg shrink-0"><i class="fas fa-people-roof"></i></span>
+                <div>
+                    <h2 class="text-xl font-extrabold text-slate-800 font-title">Portal Ibu Bapa</h2>
+                    <p class="text-xs text-slate-500">Semakan anak dan maklumat sekolah.</p>
+                </div>
+            </div>
 
             <section id="parentAnnouncementSection" class="hidden glass-panel app-card rounded-3xl border border-amber-100 p-5">
                 <div class="flex items-center gap-3"><span class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center"><i class="fas fa-bullhorn"></i></span><div><h3 class="font-extrabold text-slate-800">Pengumuman Ibu Bapa</h3><p class="text-xs text-slate-500">Maklumat khas untuk ibu bapa dan penjaga.</p></div></div>
                 <div id="parentAnnouncementList" class="mt-4 space-y-3"></div>
             </section>
 
-            <div class="glass-panel app-card rounded-[2rem] border border-white/90 p-3 md:p-4">
-                <div class="grid grid-cols-2 gap-3">
-                    <div class="service-card rounded-3xl border border-emerald-100 bg-emerald-50/70 p-3 text-center">
-                        <a href="https://script.google.com/macros/s/AKfycbxGnL-pbua1Pj29I_Xnav8bDd06o37AAsbj1zcxX0ozYYuHxtpol1rEbr1t2Sbmf_E/exec?portal=parent" target="_blank" rel="noopener noreferrer" class="block rounded-2xl p-2 hover:bg-emerald-100 transition"><span class="mx-auto w-12 h-12 rounded-2xl bg-white text-emerald-700 flex items-center justify-center shadow-sm"><i class="fas fa-hand-holding-heart"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">ePIBG+</span><span class="mt-1 block text-[10px] text-slate-500">Bayar sumbangan PIBG</span><span class="mt-2 inline-flex items-center gap-1 text-[10px] font-extrabold text-emerald-700"><i class="fas fa-arrow-up-right-from-square"></i>Buka</span></a>
-                        <button type="button" onclick="copyEpibgLink('parent')" class="mt-1 w-full rounded-xl border border-emerald-200 bg-white px-2 py-2 text-[10px] font-extrabold text-emerald-700 hover:bg-emerald-100 transition"><i class="fas fa-copy mr-1"></i>Salin Pautan</button>
+            <div class="glass-panel app-card rounded-[2rem] border border-white/90 p-3.5 md:p-4">
+                <div class="grid grid-cols-2 gap-3.5">
+                    <div class="hub-tile rounded-3xl border border-emerald-200/80 bg-gradient-to-b from-emerald-50/80 to-white p-3.5 text-center">
+                        <a href="https://script.google.com/macros/s/AKfycbxGnL-pbua1Pj29I_Xnav8bDd06o37AAsbj1zcxX0ozYYuHxtpol1rEbr1t2Sbmf_E/exec?portal=parent" target="_blank" rel="noopener noreferrer" class="block rounded-2xl p-2 transition">
+                            <span class="icon-3d icon-3d-emerald mx-auto w-14 h-14 text-xl"><i class="fas fa-hand-holding-heart"></i></span>
+                            <span class="mt-3.5 block text-sm font-extrabold text-slate-800">ePIBG+</span>
+                            <span class="mt-1 block text-[11px] text-slate-500">Bayar sumbangan PIBG</span>
+                        </a>
+                        <button type="button" onclick="copyEpibgLink('parent')" class="mt-1.5 w-full rounded-xl border border-emerald-200 bg-white px-2 py-2 text-[10px] font-extrabold text-emerald-700 shadow-sm hover:bg-emerald-50 transition"><i class="fas fa-copy mr-1"></i>Salin Pautan</button>
                         <a href="https://vt.tiktok.com/ZSVFjWR7P/" target="_blank" rel="noopener noreferrer" class="important-tutorial mt-2 flex w-full items-center justify-center rounded-xl border px-2 font-extrabold text-white transition"><span class="hot-pointer">☝️</span><span><span class="block text-[9px] tracking-widest">PENTING • TONTON DULU</span>Tutorial Bayaran PIBG</span></a>
                     </div>
-                    <div class="service-card rounded-3xl border border-rose-100 bg-rose-50/70 p-3 text-center">
-                        <a href="https://script.google.com/macros/s/AKfycbxGnL-pbua1Pj29I_Xnav8bDd06o37AAsbj1zcxX0ozYYuHxtpol1rEbr1t2Sbmf_E/exec?portal=donation" target="_blank" rel="noopener noreferrer" class="block rounded-2xl p-2 hover:bg-rose-100 transition"><span class="mx-auto w-12 h-12 rounded-2xl bg-white text-rose-700 flex items-center justify-center shadow-sm"><i class="fas fa-circle-dollar-to-slot"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Sumbangan</span><span class="mt-1 block text-[10px] text-slate-500">Kempen sumbangan semasa</span><span class="mt-2 inline-flex items-center gap-1 text-[10px] font-extrabold text-rose-700"><i class="fas fa-arrow-up-right-from-square"></i>Buka</span></a>
-                        <button type="button" onclick="copyEpibgLink('donation')" class="mt-1 w-full rounded-xl border border-rose-200 bg-white px-2 py-2 text-[10px] font-extrabold text-rose-700 hover:bg-rose-100 transition"><i class="fas fa-copy mr-1"></i>Salin Pautan</button>
+                    <div class="hub-tile rounded-3xl border border-rose-200/80 bg-gradient-to-b from-rose-50/80 to-white p-3.5 text-center">
+                        <a href="https://script.google.com/macros/s/AKfycbxGnL-pbua1Pj29I_Xnav8bDd06o37AAsbj1zcxX0ozYYuHxtpol1rEbr1t2Sbmf_E/exec?portal=donation" target="_blank" rel="noopener noreferrer" class="block rounded-2xl p-2 transition">
+                            <span class="icon-3d icon-3d-rose mx-auto w-14 h-14 text-xl"><i class="fas fa-circle-dollar-to-slot"></i></span>
+                            <span class="mt-3.5 block text-sm font-extrabold text-slate-800">Sumbangan</span>
+                            <span class="mt-1 block text-[11px] text-slate-500">Kempen sumbangan semasa</span>
+                        </a>
+                        <button type="button" onclick="copyEpibgLink('donation')" class="mt-1.5 w-full rounded-xl border border-rose-200 bg-white px-2 py-2 text-[10px] font-extrabold text-rose-700 shadow-sm hover:bg-rose-50 transition"><i class="fas fa-copy mr-1"></i>Salin Pautan</button>
                     </div>
                 </div>
-                <div class="important-help mt-3 rounded-2xl border p-4 text-xs text-slate-700">
+                <div class="important-help mt-3.5 rounded-2xl border p-4 text-xs text-slate-700">
                     <p class="font-extrabold text-rose-700"><i class="fas fa-triangle-exclamation mr-1.5"></i>JIKA CHROME PAPAR PAGE NOT FOUND</p>
                     <p class="mt-1.5 leading-relaxed">Tekan <strong>Salin Pautan</strong> → buka <strong>Google Chrome</strong> → klik <strong>titik 3 (⋮)</strong> → pilih <strong>New Incognito Tab</strong> → tampal pautan.</p>
                 </div>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                <button type="button" onclick="openDelimaModule()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-blue-100 text-sktBlue flex items-center justify-center"><i class="fas fa-id-card"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">DELIMa Anak</span></button>
-                <button type="button" onclick="openKokoSearch()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-medal"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Kokurikulum</span><span class="mt-1 block text-[10px] text-slate-400">Semak unit anak</span></button>
-                <button type="button" onclick="openSportsHouseSearch()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center"><i class="fas fa-flag"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Rumah Sukan</span><span class="mt-1 block text-[10px] text-slate-400">Semak rumah anak</span></button>
-                <button type="button" onclick="openParentIdmeHelp()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-violet-100 text-violet-700 flex items-center justify-center text-lg"><i class="fas fa-key"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">IDMe</span><span class="mt-1 block text-[10px] text-slate-400">Log masuk &amp; bantuan akaun</span></button>
-                <button type="button" onclick="openClassInfo()" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center"><i class="fas fa-school"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Info Kelas</span><span class="mt-1 block text-[10px] text-slate-400">Guru kelas &amp; jadual waktu</span></button>
-                <button type="button" onclick="openPajsk('submit')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-teal-100 text-teal-700 flex items-center justify-center"><i class="fas fa-file-arrow-up"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Rekod Sijil PAJSK</span><span class="mt-1 block text-[10px] text-slate-400">Hantar &amp; semak status sijil</span></button>
-                <button type="button" onclick="showComingSoon('Laporan Prestasi')" class="service-card glass-panel rounded-3xl border border-white/90 p-5 text-center"><span class="mx-auto w-12 h-12 rounded-2xl bg-orange-100 text-orange-700 flex items-center justify-center"><i class="fas fa-file-lines"></i></span><span class="mt-3 block text-sm font-bold text-slate-800">Laporan Prestasi</span><span class="mt-1 block text-[10px] text-slate-400">PBD, PAJSK &amp; laporan anak</span></button>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3.5 md:gap-4">
+                <button type="button" onclick="openDelimaModule()" class="hub-tile rounded-3xl p-5 text-center">
+                    <span class="icon-3d icon-3d-blue mx-auto w-14 h-14 text-xl"><i class="fas fa-id-card"></i></span>
+                    <span class="mt-3.5 block text-sm font-extrabold text-slate-800">DELIMa Anak</span>
+                    <span class="mt-1 block text-[11px] text-slate-500">Semak ID &amp; kata laluan</span>
+                </button>
+                <button type="button" onclick="openKokoSearch()" class="hub-tile rounded-3xl p-5 text-center">
+                    <span class="icon-3d icon-3d-emerald mx-auto w-14 h-14 text-xl"><i class="fas fa-medal"></i></span>
+                    <span class="mt-3.5 block text-sm font-extrabold text-slate-800">Kokurikulum</span>
+                    <span class="mt-1 block text-[11px] text-slate-500">Semak unit anak</span>
+                </button>
+                <button type="button" onclick="openSportsHouseSearch()" class="hub-tile rounded-3xl p-5 text-center">
+                    <span class="icon-3d icon-3d-rose mx-auto w-14 h-14 text-xl"><i class="fas fa-flag"></i></span>
+                    <span class="mt-3.5 block text-sm font-extrabold text-slate-800">Rumah Sukan</span>
+                    <span class="mt-1 block text-[11px] text-slate-500">Semak rumah anak</span>
+                </button>
+                <button type="button" onclick="openParentIdmeHelp()" class="hub-tile rounded-3xl p-5 text-center">
+                    <span class="icon-3d icon-3d-violet mx-auto w-14 h-14 text-xl"><i class="fas fa-key"></i></span>
+                    <span class="mt-3.5 block text-sm font-extrabold text-slate-800">IDMe</span>
+                    <span class="mt-1 block text-[11px] text-slate-500">Log masuk &amp; bantuan akaun</span>
+                </button>
+                <button type="button" onclick="openClassInfo()" class="hub-tile rounded-3xl p-5 text-center">
+                    <span class="icon-3d icon-3d-cyan mx-auto w-14 h-14 text-xl"><i class="fas fa-school"></i></span>
+                    <span class="mt-3.5 block text-sm font-extrabold text-slate-800">Info Kelas</span>
+                    <span class="mt-1 block text-[11px] text-slate-500">Guru kelas &amp; jadual waktu</span>
+                </button>
+                <button type="button" onclick="openPajsk('submit')" class="hub-tile rounded-3xl p-5 text-center">
+                    <span class="icon-3d icon-3d-teal mx-auto w-14 h-14 text-xl"><i class="fas fa-file-arrow-up"></i></span>
+                    <span class="mt-3.5 block text-sm font-extrabold text-slate-800">Rekod Sijil PAJSK</span>
+                    <span class="mt-1 block text-[11px] text-slate-500">Hantar &amp; semak status sijil</span>
+                </button>
+                <button type="button" onclick="showComingSoon('Laporan Prestasi')" class="hub-tile rounded-3xl p-5 text-center">
+                    <span class="icon-3d icon-3d-orange mx-auto w-14 h-14 text-xl"><i class="fas fa-file-lines"></i></span>
+                    <span class="mt-3.5 block text-sm font-extrabold text-slate-800">Laporan Prestasi</span>
+                    <span class="mt-1 block text-[11px] text-slate-500">PBD, PAJSK &amp; laporan anak</span>
+                </button>
             </div>
         </section>
 
@@ -931,6 +1093,19 @@
         </div>
     </div>
 
+    <!-- Modal Pengesahan Padam Kandungan -->
+    <div id="deleteConfirmModal" class="hidden fixed inset-0 z-[95] bg-slate-950/60 backdrop-blur-sm px-4 py-8 items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="deleteConfirmTitle" onclick="if (event.target === this) closeDeleteConfirm()">
+        <div class="w-full max-w-sm rounded-[2rem] bg-white p-6 shadow-2xl border border-white/80 text-center">
+            <div class="mx-auto w-14 h-14 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center text-xl"><i class="fas fa-trash-can"></i></div>
+            <h2 id="deleteConfirmTitle" class="mt-4 text-lg font-extrabold text-slate-800 font-title">Padam Kandungan?</h2>
+            <p id="deleteConfirmMessage" class="mt-2 text-xs text-slate-500 leading-relaxed">Tindakan ini akan memadam kandungan secara kekal.</p>
+            <div class="mt-5 grid grid-cols-2 gap-2.5">
+                <button type="button" onclick="closeDeleteConfirm()" class="rounded-2xl bg-slate-100 hover:bg-slate-200 py-3 text-xs font-bold text-slate-600 transition">Batal</button>
+                <button id="deleteConfirmActionBtn" type="button" class="rounded-2xl bg-red-600 hover:bg-red-700 py-3 text-xs font-extrabold text-white shadow-sm transition">Ya, Padam</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Butang pemasangan PWA -->
     <button id="installAppButton" type="button" class="hidden fixed right-4 bottom-4 z-[70] items-center gap-2 rounded-2xl bg-sktBlue px-4 py-3 text-xs font-extrabold text-white shadow-2xl shadow-blue-950/30 hover:bg-[#0b3d69] transition" aria-label="Pasang aplikasi TEMIN HUB">
         <i class="fas fa-download"></i><span>Install App</span>
@@ -1048,6 +1223,7 @@
         const CONTENT_PUBLISH_KEY_STORAGE = 'teminhub_content_publish_key';
         let editingContentId = '';
         let managedContentItems = [];
+        let pendingDeleteContentId = '';
 
         function isTeacherPortalUnlocked() {
             return localStorage.getItem(TEACHER_REMEMBER_KEY) === 'true' ||
@@ -1331,14 +1507,33 @@
             } catch (error) { showToast(error.message, true); }
         }
 
-        async function deleteManagedContent(id, title) {
-            if (!window.confirm(`Padam “${title}” secara kekal?`)) return;
+        function deleteManagedContent(id, title) {
+            pendingDeleteContentId = id;
+            const modal = document.getElementById('deleteConfirmModal');
+            document.getElementById('deleteConfirmMessage').textContent = `Padam “${title}” secara kekal?`;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeDeleteConfirm() {
+            pendingDeleteContentId = '';
+            const modal = document.getElementById('deleteConfirmModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        document.getElementById('deleteConfirmActionBtn')?.addEventListener('click', async function () {
+            if (!pendingDeleteContentId) return;
+            const idToDelete = pendingDeleteContentId;
+            closeDeleteConfirm();
             try {
-                await contentAdminRequest('delete', { id });
+                await contentAdminRequest('delete', { id: idToDelete });
                 showToast('Kandungan berjaya dipadam.');
                 await Promise.all([loadManageContent(), loadPublishedContent()]);
-            } catch (error) { showToast(error.message, true); }
-        }
+            } catch (error) {
+                showToast(error.message, true);
+            }
+        });
 
         function editManagedContent(id) {
             const item = managedContentItems.find(entry => entry.id === id);
@@ -2522,7 +2717,6 @@ window.copyAll = function () {
         function showSubjectComingSoon(subjectName) {
             if (typeof showToast === 'function') showToast(subjectName + ' akan ditambah kemudian.', 'info');
             else if (typeof showComingSoon === 'function') showComingSoon(subjectName);
-            else alert(subjectName + ' akan ditambah kemudian.');
         }
 
         const VISITOR_SESSION_KEY = 'teminhub_visit_counted_date';
@@ -2545,10 +2739,23 @@ window.copyAll = function () {
             }
         }
 
-        document.addEventListener('DOMContentLoaded', loadVisitorCounter);
+        document.addEventListener('DOMContentLoaded', function () {
+            loadVisitorCounter();
+            const dateBadge = document.querySelector('#headerLiveDate span');
+            if (dateBadge) {
+                dateBadge.textContent = new Intl.DateTimeFormat('ms-MY', {
+                    weekday: 'short',
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric',
+                    timeZone: 'Asia/Kuala_Lumpur'
+                }).format(new Date());
+            }
+        });
 
         document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape') {
+                closeDeleteConfirm();
                 closeLearningMenu();
                 closeParentIdmeHelp();
                 closeClassroomGuide();

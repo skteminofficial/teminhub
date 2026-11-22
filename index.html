@@ -341,6 +341,10 @@
                     <div id="calendarList" class="mt-4 space-y-3"><p class="rounded-2xl bg-slate-50 p-4 text-xs text-slate-500">Memuatkan takwim...</p></div>
                 </div>
             </div>
+            <section id="dashboardCurrentAppsSection" class="hidden glass-panel app-card rounded-3xl border border-blue-100 p-5">
+                <div class="flex items-center gap-3"><span class="w-10 h-10 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center"><i class="fas fa-grip"></i></span><div><h3 class="font-extrabold text-slate-800">Aplikasi Semasa</h3><p class="text-xs text-slate-500">Pautan dan tindakan semasa sekolah.</p></div></div>
+                <div id="dashboardCurrentAppsGrid" class="mt-4 grid grid-cols-2 md:grid-cols-3 gap-3.5 md:gap-4"></div>
+            </section>
         </section>
 
         <section id="portal-murid" class="portal-view hidden space-y-6">
@@ -381,6 +385,7 @@
                     <span class="mt-3.5 block text-sm font-extrabold text-slate-800">Pembelajaran</span>
                     <span class="mt-1 block text-[11px] text-slate-500">Pilih subjek Tahun 1–6</span>
                 </button>
+                <div id="studentCurrentAppsGrid" class="contents"></div>
             </div>
         </section>
 
@@ -437,6 +442,7 @@
                     <span class="mt-3.5 block text-sm font-extrabold text-slate-800">TEMIN AI Studio</span>
                     <span class="mt-1 block text-[11px] text-slate-500">Alatan AI untuk guru</span>
                 </a>
+                <div id="teacherCurrentAppsGrid" class="contents"></div>
             </div>
 
             <div class="pt-2">
@@ -1081,7 +1087,7 @@
             <div id="contentPublishPanel">
             <form id="contentManagerForm" class="mt-5 space-y-4" onsubmit="publishContent(event)">
                 <div class="grid grid-cols-1 gap-4">
-                    <div><label for="contentType" class="block mb-2 text-xs font-bold text-slate-600">JENIS</label><select id="contentType" required onchange="toggleContentFields()" class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-rose-500 focus:outline-none"><option value="PENGUMUMAN">Pengumuman</option><option value="TAKWIM">Takwim</option><option value="APLIKASI">Aplikasi Semasa Ibu Bapa</option></select></div>
+                    <div><label for="contentType" class="block mb-2 text-xs font-bold text-slate-600">JENIS</label><select id="contentType" required onchange="toggleContentFields()" class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-rose-500 focus:outline-none"><option value="PENGUMUMAN">Pengumuman</option><option value="TAKWIM">Takwim</option><option value="APLIKASI">Aplikasi Semasa</option></select></div>
                     <fieldset><legend class="block mb-2 text-xs font-bold text-slate-600">SASARAN <span class="font-normal text-slate-400">(boleh pilih lebih daripada satu)</span></legend><div id="contentTargets" class="grid grid-cols-2 sm:grid-cols-4 gap-2"><label class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 cursor-pointer hover:bg-blue-50"><input type="checkbox" name="contentTarget" value="Dashboard Awam" checked class="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"><span class="text-xs font-bold text-slate-700">Dashboard Awam</span></label><label class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 cursor-pointer hover:bg-blue-50"><input type="checkbox" name="contentTarget" value="Murid" class="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"><span class="text-xs font-bold text-slate-700">Murid</span></label><label class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 cursor-pointer hover:bg-amber-50"><input type="checkbox" name="contentTarget" value="Ibu Bapa" class="h-4 w-4 rounded border-slate-300 text-amber-600 focus:ring-amber-500"><span class="text-xs font-bold text-slate-700">Ibu Bapa</span></label><label class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 cursor-pointer hover:bg-emerald-50"><input type="checkbox" name="contentTarget" value="Guru" class="h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"><span class="text-xs font-bold text-slate-700">Guru</span></label></div></fieldset>
                 </div>
                 <div><label for="contentTitle" class="block mb-2 text-xs font-bold text-slate-600">TAJUK</label><input id="contentTitle" required maxlength="120" placeholder="Contoh: Pertandingan Poster Bulan Kemerdekaan" class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-rose-500 focus:outline-none"></div>
@@ -1095,7 +1101,7 @@
                     <div><label for="contentPlace" class="block mb-2 text-xs font-bold text-slate-600">TEMPAT</label><input id="contentPlace" maxlength="120" placeholder="Contoh: Dewan SK Temin" class="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-violet-500 focus:outline-none"></div>
                 </div>
                 <div id="currentAppFields" class="hidden space-y-4 rounded-2xl border border-amber-200 bg-amber-50/70 p-4">
-                    <div><label for="contentAppUrl" class="block mb-2 text-xs font-bold text-amber-900">PAUTAN APLIKASI</label><input id="contentAppUrl" type="url" inputmode="url" placeholder="https://..." class="w-full rounded-2xl border-2 border-amber-200 bg-white px-4 py-3 text-sm focus:border-amber-500 focus:outline-none"><p class="mt-1.5 text-[10px] text-amber-800">Kad ini akan muncul dalam grid Portal Ibu Bapa sepanjang tempoh aktif.</p></div>
+                    <div><label for="contentAppUrl" class="block mb-2 text-xs font-bold text-amber-900">PAUTAN APLIKASI</label><input id="contentAppUrl" type="url" inputmode="url" placeholder="https://..." class="w-full rounded-2xl border-2 border-amber-200 bg-white px-4 py-3 text-sm focus:border-amber-500 focus:outline-none"><p class="mt-1.5 text-[10px] text-amber-800">Kad akan muncul pada semua portal yang ditandakan sepanjang tempoh aktif.</p></div>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <div><label for="contentAppIcon" class="block mb-2 text-xs font-bold text-amber-900">IKON</label><select id="contentAppIcon" class="w-full rounded-xl border border-amber-200 bg-white px-3 py-3 text-xs font-bold text-slate-700"><option value="file-lines">📄 Borang</option><option value="trophy">🏆 Pertandingan</option><option value="user-plus">👤 Pendaftaran</option><option value="money-bill-wave">💵 Bayaran</option><option value="certificate">📜 Sijil</option><option value="book-open">📖 Buku</option><option value="medal">🏅 Sukan</option><option value="graduation-cap">🎓 Akademik</option><option value="person-chalkboard">🧑‍🏫 Taklimat</option><option value="users">👥 Mesyuarat</option><option value="square-poll-vertical">📊 Undian</option><option value="clipboard-question">📋 Soal Selidik</option><option value="hand-holding-heart">🤝 Bantuan</option><option value="heart-pulse">❤️ Kesihatan</option><option value="bus">🚌 Pengangkutan</option><option value="utensils">🍽️ Makanan</option><option value="people-group">🧑‍🤝‍🧑 Aktiviti</option><option value="calendar-days">📅 Kalendar</option><option value="download">⬇️ Muat Turun</option><option value="circle-play">▶️ Video</option><option value="link">🔗 Pautan</option><option value="bullhorn">📣 Hebahan</option><option value="ticket">🎟️ Program</option><option value="school">🏫 Sekolah</option><option value="gift">🎁 Hadiah</option></select></div>
                         <div><label for="contentAppColor" class="block mb-2 text-xs font-bold text-amber-900">WARNA</label><select id="contentAppColor" class="w-full rounded-xl border border-amber-200 bg-white px-3 py-3 text-xs font-bold text-slate-700"><option value="blue">Biru</option><option value="sky">Biru muda</option><option value="cyan">Cyan</option><option value="teal">Teal</option><option value="emerald">Emerald</option><option value="green">Hijau</option><option value="amber">Kuning</option><option value="orange">Jingga</option><option value="rose">Merah jambu</option><option value="fuchsia">Fuchsia</option><option value="violet">Ungu</option><option value="indigo">Indigo</option></select></div>
@@ -1153,7 +1159,7 @@
     <footer class="mt-16 bg-[#072b4b] text-blue-100/70 px-4 py-10 text-center border-t border-white/5">
         <div class="max-w-4xl mx-auto">
             <img src="logo-sk-temin.png" alt="" aria-hidden="true" class="w-12 h-12 object-contain mx-auto opacity-90">
-                <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.3.51 PWA</p>
+                <p class="mt-3 text-white text-base font-extrabold font-title tracking-wide">TEMIN HUB v4.3.52 PWA</p>
             <p class="mt-1.5 text-xs text-sktYellow font-semibold">&copy; SK Temin | Unit ICT</p>
             <div class="mx-auto mt-5 max-w-sm rounded-2xl border border-white/10 bg-white/5 px-4 py-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[10px] md:text-xs text-blue-100/70">
                 <span class="inline-flex items-center gap-1.5"><i class="fas fa-eye text-sktYellow"></i>Hari Ini: <strong id="visitToday" class="text-white">—</strong></span>
@@ -1355,11 +1361,8 @@
             document.getElementById('contentAppUrl').required = isCurrentApp;
             document.getElementById('contentEnd').required = isCurrentApp;
             const targetInputs = [...document.querySelectorAll('input[name="contentTarget"]')];
-            targetInputs.forEach(input => {
-                input.disabled = isCurrentApp;
-                if (isCurrentApp) input.checked = input.value === 'Ibu Bapa';
-            });
-            if (!isCurrentApp && !targetInputs.some(input => input.checked)) {
+            targetInputs.forEach(input => { input.disabled = false; });
+            if (!targetInputs.some(input => input.checked)) {
                 const dashboardTarget = targetInputs.find(input => input.value === 'Dashboard Awam');
                 if (dashboardTarget) dashboardTarget.checked = true;
             }
@@ -1681,6 +1684,10 @@
             const teacherList = document.getElementById('teacherAnnouncementList');
             const parentSection = document.getElementById('parentAnnouncementSection');
             const parentList = document.getElementById('parentAnnouncementList');
+            const dashboardCurrentAppsSection = document.getElementById('dashboardCurrentAppsSection');
+            const dashboardCurrentAppsGrid = document.getElementById('dashboardCurrentAppsGrid');
+            const studentCurrentAppsGrid = document.getElementById('studentCurrentAppsGrid');
+            const teacherCurrentAppsGrid = document.getElementById('teacherCurrentAppsGrid');
             const parentCurrentAppsGrid = document.getElementById('parentCurrentAppsGrid');
             if (!CONTENT_API_URL) {
                 announcementList.innerHTML = '<p class="rounded-2xl bg-slate-50 p-4 text-xs text-slate-500">Pengumuman belum disambungkan.</p>';
@@ -1688,6 +1695,10 @@
                 studentSection?.classList.add('hidden');
                 teacherSection?.classList.add('hidden');
                 parentSection?.classList.add('hidden');
+                dashboardCurrentAppsSection?.classList.add('hidden');
+                dashboardCurrentAppsGrid?.replaceChildren();
+                studentCurrentAppsGrid?.replaceChildren();
+                teacherCurrentAppsGrid?.replaceChildren();
                 parentCurrentAppsGrid?.replaceChildren();
                 return;
             }
@@ -1700,7 +1711,11 @@
                 const teacherAnnouncements = result.items.filter(item => item.type === 'PENGUMUMAN' && targetIncludes(item.target, 'Guru'));
                 const parentAnnouncements = result.items.filter(item => item.type === 'PENGUMUMAN' && targetIncludes(item.target, 'Ibu Bapa'));
                 const calendar = result.items.filter(item => item.type === 'TAKWIM' && targetIncludes(item.target, 'Dashboard Awam'));
-                const parentCurrentApps = result.items.filter(item => item.type === 'APLIKASI' && targetIncludes(item.target, 'Ibu Bapa'));
+                const currentApps = result.items.filter(item => item.type === 'APLIKASI');
+                const dashboardCurrentApps = currentApps.filter(item => targetIncludes(item.target, 'Dashboard Awam'));
+                const studentCurrentApps = currentApps.filter(item => targetIncludes(item.target, 'Murid'));
+                const teacherCurrentApps = currentApps.filter(item => targetIncludes(item.target, 'Guru'));
+                const parentCurrentApps = currentApps.filter(item => targetIncludes(item.target, 'Ibu Bapa'));
                 announcementList.replaceChildren(...(announcements.length ? announcements.map(item => createContentCard(item, false)) : [Object.assign(document.createElement('p'), { className: 'rounded-2xl bg-slate-50 p-4 text-xs text-slate-500', textContent: 'Tiada pengumuman baharu buat masa ini.' })]));
                 calendarList.replaceChildren(...(calendar.length ? calendar.map(item => createContentCard(item, true)) : [Object.assign(document.createElement('p'), { className: 'rounded-2xl bg-slate-50 p-4 text-xs text-slate-500', textContent: 'Tiada aktiviti akan datang.' })]));
                 if (studentAnnouncements.length) {
@@ -1726,12 +1741,21 @@
                 }
                 const currentAppCards = parentCurrentApps.map(createCurrentAppCard).filter(Boolean);
                 parentCurrentAppsGrid?.replaceChildren(...currentAppCards);
+                const dashboardAppCards = dashboardCurrentApps.map(createCurrentAppCard).filter(Boolean);
+                dashboardCurrentAppsGrid?.replaceChildren(...dashboardAppCards);
+                dashboardCurrentAppsSection?.classList.toggle('hidden', !dashboardAppCards.length);
+                studentCurrentAppsGrid?.replaceChildren(...studentCurrentApps.map(createCurrentAppCard).filter(Boolean));
+                teacherCurrentAppsGrid?.replaceChildren(...teacherCurrentApps.map(createCurrentAppCard).filter(Boolean));
             } catch (error) {
                 announcementList.innerHTML = '<p class="rounded-2xl bg-red-50 p-4 text-xs text-red-600">Pengumuman tidak dapat dimuatkan.</p>';
                 calendarList.innerHTML = '<p class="rounded-2xl bg-red-50 p-4 text-xs text-red-600">Takwim tidak dapat dimuatkan.</p>';
                 studentSection?.classList.add('hidden');
                 teacherSection?.classList.add('hidden');
                 parentSection?.classList.add('hidden');
+                dashboardCurrentAppsSection?.classList.add('hidden');
+                dashboardCurrentAppsGrid?.replaceChildren();
+                studentCurrentAppsGrid?.replaceChildren();
+                teacherCurrentAppsGrid?.replaceChildren();
                 parentCurrentAppsGrid?.replaceChildren();
             }
         }
